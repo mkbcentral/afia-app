@@ -1,5 +1,5 @@
 <?php
-    namespace App\Helpers\Fiches\FicheHelper;
+    namespace App\Helpers\Fiches;
 
 use App\Models\Fiche;
 

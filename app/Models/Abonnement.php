@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Abonnement extends Model
 {
     use HasFactory;
-
+    protected $guarded=[];
     public function patients(): HasMany
     {
         return $this->hasMany(PatientAbonne::class);

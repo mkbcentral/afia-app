@@ -1,7 +1,8 @@
 <?php
-    namespace App\Helpers\Patients\PatientHelper;
+namespace App\Helpers\Patients;
 
 use App\Models\PatientAbonne;
+use App\Models\PatientPersonnel;
 use App\Models\PatientPrive;
     class PatientHelper{
         //Create new Patient
@@ -32,7 +33,7 @@ use App\Models\PatientPrive;
 
             }else{
                 //Create personnel patient
-                $patient=new PatientAbonne();
+                $patient=new PatientPersonnel();
                 $patient->name=$name;
                 $patient->gender=$gender;
                 $patient->date_of_birth=$date_of_birth;
@@ -41,7 +42,7 @@ use App\Models\PatientPrive;
                 $patient->numero=$numero;
                 $patient->type=$type;
                 $patient->fiche_id=$fiche_id;
-                $patient->service_id=$service_id;
+                $patient->personnel_service_id=$service_id;
             }
             $patient->save();
             return $patient;

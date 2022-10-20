@@ -1,5 +1,5 @@
 <?php
-namespace App\Helpers\Others\OtherHelper;
+namespace App\Helpers\Others;
 
 use App\Models\Abonnement;
 use App\Models\PersonnelService;
