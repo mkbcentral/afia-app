@@ -1,9 +1,8 @@
 <?php
-    namespace App\Helpers\PatientHelper;
+    namespace App\Helpers\Patients\PatientHelper;
 
 use App\Models\PatientAbonne;
 use App\Models\PatientPrive;
-
     class PatientHelper{
         //Create new Patient
         public function create($name,$gender,$date_of_birth,$phone,$commune,$quartier,$numero,$type='',$fiche_id=0,$service_id=0,$abonnement_id=0,$is_prodeo=false){
