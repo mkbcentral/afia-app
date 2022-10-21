@@ -6,8 +6,8 @@ use App\Models\PatientPersonnel;
 use App\Models\PatientPrive;
     class PatientHelper{
         //Create new Patient
-        public function create($name,$gender,$date_of_birth,$phone,$commune,$quartier,$numero,$type='',$fiche_id=0,$service_id=0,$abonnement_id=0,$is_prodeo=false){
-            if ($type=='' && $service_id==0 && $abonnement_id==0) {
+        public function create($matricule="",$name,$gender,$date_of_birth,$phone,$commune,$quartier,$numero,$type='',$fiche_id=0,$service_id=0,$abonnement_id=0,$is_prodeo=false){
+            if ($matricule==""&& $type=='' && $service_id==0 && $abonnement_id==0) {
                 //Create private patient
                 $patient=new PatientPrive();
                 $patient->name=$name;
@@ -21,6 +21,7 @@ use App\Models\PatientPrive;
             } else if($service_id==0){
                //Create subscriber patient
                 $patient=new PatientAbonne();
+                $patient->matricule=$matricule;
                 $patient->name=$name;
                 $patient->gender=$gender;
                 $patient->date_of_birth=$date_of_birth;

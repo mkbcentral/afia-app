@@ -2,6 +2,7 @@
 namespace App\Helpers\Others;
 
 use App\Models\Abonnement;
+use App\Models\PatientType;
 use App\Models\PersonnelService;
 
 class OtherHelper{
@@ -15,6 +16,14 @@ class OtherHelper{
     //Créer un nouveau service
     public function createService($name){
         $service=PersonnelService::create([
+            'name'=>$name
+        ]);
+        return $service;
+    }
+
+    //Créer un nouveau service
+    public function createServiceType($name){
+        $service=PatientType::create([
             'name'=>$name
         ]);
         return $service;
