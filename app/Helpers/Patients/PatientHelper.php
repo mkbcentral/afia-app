@@ -48,5 +48,15 @@ use App\Models\PatientPrive;
             $patient->save();
             return $patient;
         }
-
+        //Check if patient exist
+        public function chekIfPatientExist($name,$date_of_birth,$type){
+            if ($type=="Abonné") {
+                $patient=PatientAbonne::where('name',$name)->where('date_of_birth',$date_of_birth)->first();
+            } else if($type=="Privé") {
+                $patient=PatientPrive::where('name',$name)->where('date_of_birth',$date_of_birth)->first();
+            }else{
+                $patient=PatientPersonnel::where('name',$name)->where('date_of_birth',$date_of_birth)->first();
+            }
+            return $patient;
+        }
     }
