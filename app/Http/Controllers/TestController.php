@@ -12,7 +12,6 @@ class TestController extends Controller
     public function test(){
        return (new OtherHelper())->createServiceType('Fils');
     }
-
     public function test2(){
         $checkPatient=(new PatientHelper())->chekIfPatientExist('KALENGA','1993-03-03','Personnel');
         dd($checkPatient);

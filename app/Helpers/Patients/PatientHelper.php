@@ -48,6 +48,51 @@ use App\Models\PatientPrive;
             $patient->save();
             return $patient;
         }
+
+        //Update patient
+        public function update($id,$matricule="",$name,$gender,$date_of_birth,$phone,$commune,$quartier,$numero,$type='',$fiche_id=0,$service_id=0,$abonnement_id=0,$is_prodeo=false){
+            if ($matricule==""&& $type=='' && $service_id==0 && $abonnement_id==0) {
+                //Create private patient
+                $patient= PatientPrive::find($id);
+                $patient->name=$name;
+                $patient->gender=$gender;
+                $patient->date_of_birth=$date_of_birth;
+                $patient->phone=$phone;
+                $patient->commune=$commune;
+                $patient->numero=$numero;
+                $patient->fiche_id=$fiche_id;
+                $patient->is_prodeo=$is_prodeo;
+            } else if($service_id==0){
+               //Create subscriber patient
+                $patient=PatientAbonne::find($id);;
+                $patient->matricule=$matricule;
+                $patient->name=$name;
+                $patient->gender=$gender;
+                $patient->date_of_birth=$date_of_birth;
+                $patient->phone=$phone;
+                $patient->commune=$commune;
+                $patient->numero=$numero;
+                $patient->type=$type;
+                $patient->fiche_id=$fiche_id;
+                $patient->abonnement_id=$abonnement_id;
+
+            }else{
+                //Create personnel patient
+                $patient= PatientPersonnel::find($id);;
+                $patient->name=$name;
+                $patient->gender=$gender;
+                $patient->date_of_birth=$date_of_birth;
+                $patient->phone=$phone;
+                $patient->commune=$commune;
+                $patient->numero=$numero;
+                $patient->type=$type;
+                $patient->fiche_id=$fiche_id;
+                $patient->personnel_service_id=$service_id;
+            }
+            $patient->update();
+            return $patient;
+        }
+
         //Check if patient exist
         public function chekIfPatientExist($name,$date_of_birth,$type){
             if ($type=="Abonné") {
