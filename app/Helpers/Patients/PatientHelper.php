@@ -104,4 +104,18 @@ use App\Models\PatientPrive;
             }
             return $patient;
         }
+
+        //Delete patient
+        public function delete($id,$type){
+            if ($type=="Abonné") {
+                $patient=PatientAbonne::find($id);
+            } else if($type=="Privé") {
+                $patient=PatientPrive::find($id);
+            }else{
+                $patient=PatientPersonnel::find($id);
+            }
+            return $patient;
+        }
+
+
     }
