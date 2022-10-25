@@ -23,7 +23,7 @@ use App\Models\Fiche;
             return $fiche;
         }
         //Delete fiche
-        public function delete($id){
+        public function getFiche($id){
             $fiche=Fiche::find($id);
             return $fiche;
         }

@@ -17,6 +17,18 @@
             @endif
             >
             <div class="modal-body">
+                @if ($isEditable==false)
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <x-label value="{{ __('Numero de la fiche') }}" />
+                                <x-input class="" type='text'
+                                        placeholder="Numero" wire:model.defer='state.fiche_number'/>
+                                @error('fiche_number') <span class="error text-danger">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                    </div>
+                @endif
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
@@ -29,7 +41,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="my-select">Sexe</label>
-                            <select id="my-select" class="form-control" name="" wire:model.defer='state.gender'>
+                            <select id="my-select" class="form-control" wire:model.defer='state.gender'>
                                 <option>Choisir...</option>
                                 <option value="M">M</option>
                                 <option value="F">F</option>

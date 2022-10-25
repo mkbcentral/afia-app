@@ -15,6 +15,7 @@ use App\Models\PatientPrive;
                 $patient->date_of_birth=$date_of_birth;
                 $patient->phone=$phone;
                 $patient->commune=$commune;
+                $patient->quartier=$quartier;
                 $patient->numero=$numero;
                 $patient->fiche_id=$fiche_id;
                 $patient->is_prodeo=$is_prodeo;
@@ -27,6 +28,7 @@ use App\Models\PatientPrive;
                 $patient->date_of_birth=$date_of_birth;
                 $patient->phone=$phone;
                 $patient->commune=$commune;
+                $patient->quartier=$quartier;
                 $patient->numero=$numero;
                 $patient->type=$type;
                 $patient->fiche_id=$fiche_id;
@@ -40,6 +42,7 @@ use App\Models\PatientPrive;
                 $patient->date_of_birth=$date_of_birth;
                 $patient->phone=$phone;
                 $patient->commune=$commune;
+                $patient->quartier=$quartier;
                 $patient->numero=$numero;
                 $patient->type=$type;
                 $patient->fiche_id=$fiche_id;
@@ -59,8 +62,8 @@ use App\Models\PatientPrive;
                 $patient->date_of_birth=$date_of_birth;
                 $patient->phone=$phone;
                 $patient->commune=$commune;
+                $patient->quartier=$quartier;
                 $patient->numero=$numero;
-                $patient->fiche_id=$fiche_id;
                 $patient->is_prodeo=$is_prodeo;
             } else if($service_id==0){
                //Create subscriber patient
@@ -71,9 +74,9 @@ use App\Models\PatientPrive;
                 $patient->date_of_birth=$date_of_birth;
                 $patient->phone=$phone;
                 $patient->commune=$commune;
+                $patient->quartier=$quartier;
                 $patient->numero=$numero;
                 $patient->type=$type;
-                $patient->fiche_id=$fiche_id;
                 $patient->abonnement_id=$abonnement_id;
 
             }else{
@@ -84,9 +87,9 @@ use App\Models\PatientPrive;
                 $patient->date_of_birth=$date_of_birth;
                 $patient->phone=$phone;
                 $patient->commune=$commune;
+                $patient->quartier=$quartier;
                 $patient->numero=$numero;
                 $patient->type=$type;
-                $patient->fiche_id=$fiche_id;
                 $patient->personnel_service_id=$service_id;
             }
             $patient->update();
