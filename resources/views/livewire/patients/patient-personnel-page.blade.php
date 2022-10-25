@@ -5,7 +5,7 @@
                 <div class="col-sm-10">
                     <div class="text-center">
                         <img src="{{ asset('logo.png') }}" alt="" width="60px">
-                        <h1 class="m-0  text-primary text-uppercase">  Liste des patients privés</h1>
+                        <h1 class="m-0  text-primary text-uppercase">  Liste des patients personnels</h1>
                     </div>
 
                 </div>
@@ -13,7 +13,7 @@
             <div class="d-flex justify-content-between">
                 <H3 class="text-info">Total: {{$patients->count()}} patients</H3>
                 <button class="btn btn-primary" type="button" wire:click.prevent="resetPropreties"
-                    data-toggle="modal" data-target="#formPatientPrive">Nouveau</button>
+                    data-toggle="modal" data-target="#formPatientPersonnel">Nouveau</button>
 
             </div>
 
@@ -47,6 +47,7 @@
                             <th>NOM COMPLET</th>
                             <th class="text-center">GENRE</th>
                             <th class="text-center">AGE</th>
+                            <th class="text-center">SERVICE</th>
                             <th class="text-center">TELEPHONE</th>
                             <th>ADRESSE</th>
                             <th class="text-center">ACTIONS</th>
@@ -60,10 +61,11 @@
                                 <td>{{$patient->name}}</td>
                                 <td class="text-center">{{$patient->gender}}</td>
                                 <td class="text-center">0</td>
+                                <td class="text-center">{{$patient->service->name.'/'.$patient->type}}</td>
                                 <td class="text-center">{{$patient->phone}}</td>
                                 <td>{{$patient->commune.'/'.$patient->quartier.'/'.$patient->numero}}</td>
                                 <td class="text-center">
-                                    <button data-toggle="modal" data-target="#formPatientPrive"
+                                    <button data-toggle="modal" data-target="#formPatientPersonnel"
                                         wire:click.prevent='edit({{$patient}})' class="btn btn-link btn-sm"
                                         type="button"><i class="fas fa-edit    "></i>
                                     </button>
@@ -98,6 +100,6 @@
             @endif
         </div>
     </div>
-    @include('livewire.patients.modals.form-patient-prive')
+    @include('livewire.patients.modals.form-patient-personnel')
     @include('livewire.patients.modals.form-edit-fiche-number')
 </div>

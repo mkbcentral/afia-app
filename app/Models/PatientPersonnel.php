@@ -14,8 +14,8 @@ class PatientPersonnel extends Model
     {
         return $this->belongsTo(Fiche::class, 'fiche_id');
     }
-    public function personnel(): BelongsTo
+    public function service(): BelongsTo
     {
-        return $this->belongsTo(PatientPersonnel::class, 'personnel_service_id');
+        return $this->belongsTo(PersonnelService::class, 'personnel_service_id');
     }
 }

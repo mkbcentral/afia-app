@@ -4,16 +4,19 @@ namespace App\Http\Livewire\Patients;
 
 use App\Helpers\Fiches\FicheHelper;
 use App\Helpers\Patients\PatientHelper;
-use App\Models\PatientPrive;
+use App\Models\Abonnement;
+use App\Models\PatientAbonne;
+use App\Models\PatientType;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class PatientPrivePage extends Component
+class PatientAbonnePage extends Component
 {
     use WithPagination;
     public $state=[],$isEditable,$patientToEdit,$patientToDelete,$fiche_number_to_edit,$ficheToEdit;
     public $type="Privé",$source="Golf",$keySearch="",$pageNumber=10;
+    public $abonnements,$typePatients;
     protected $listeners=['patientListener'=>'delete'];
 
     public function store(){
@@ -23,14 +26,14 @@ class PatientPrivePage extends Component
         }else{
             $fiche=(new FicheHelper())->create($this->state['fiche_number'],$this->type,$this->source);
             $patient=(new PatientHelper())
-                ->create("",$this->state['name'],$this->state['gender'],$this->state['date_of_birth'],
+                ->create($this->state['matricule'],$this->state['name'],$this->state['gender'],$this->state['date_of_birth'],
                     $this->state['phone'],$this->state['commune'],$this->state['quartier'],
-                    $this->state['numero'],'',$fiche->id,0,0,false);
+                    $this->state['numero'],$this->state['type'],$fiche->id,0,$this->state['abonnement_id'],false,);
             $this->dispatchBrowserEvent('data-added',['message'=>'Pateint '.$patient->name.' bien ajouté !']);
         }
     }
 
-    public function edit(PatientPrive $patient){
+    public function edit(PatientAbonne $patient){
         $this->state=$patient->toArray();
         $this->isEditable=true;
         $this->patientToEdit=$patient;
@@ -40,9 +43,9 @@ class PatientPrivePage extends Component
 
     public function update(){
         $patient=(new PatientHelper())
-                ->update($this->patientToEdit->id,"",$this->state['name'],$this->state['gender'],$this->state['date_of_birth'],
+                ->update($this->patientToEdit->id,$this->state['matricule'],$this->state['name'],$this->state['gender'],$this->state['date_of_birth'],
                     $this->state['phone'],$this->state['commune'],$this->state['quartier'],
-                    $this->state['numero'],'',0,0,0,false);
+                    $this->state['numero'],$this->state['type'],0,0,$this->state['abonnement_id'],false);
         $this->dispatchBrowserEvent('data-updated',['message'=>'Pateint '.$patient->name.' bien mis à jour !']);
     }
 
@@ -52,7 +55,7 @@ class PatientPrivePage extends Component
         $this->dispatchBrowserEvent('data-updated',['message'=>'Fiche bien mise à jour !']);
     }
 
-    public function showDeleteDialog(PatientPrive $patient){
+    public function showDeleteDialog(PatientAbonne $patient){
         $this->dispatchBrowserEvent('delete-patient-dialog');
         $this->patientToDelete=$patient;
     }
@@ -74,6 +77,8 @@ class PatientPrivePage extends Component
                 'commune'=>'required',
                 'numero'=>'required|numeric',
                 'quartier'=>'required',
+                'abonnement_id'=>'required|numeric',
+                'type'=>'required',
                 'fiche_number'=>'required|unique:fiches,numero'
             ]
         )->validate();
@@ -89,14 +94,16 @@ class PatientPrivePage extends Component
     }
 
     public function mount(){
-
+        $this->abonnements=Abonnement::all();
+        $this->typePatients=PatientType::all();
     }
     public function render()
     {
-        $patients=PatientPrive::where('name','like','%'.$this->keySearch.'%')
+        $patients=PatientAbonne::where('name','like','%'.$this->keySearch.'%')
                 ->with('fiche')
+                ->with('abonnement')
                 ->orderBy('created_at','ASC')
                 ->paginate($this->pageNumber);
-        return view('livewire.patients.patient-prive-page',['patients'=>$patients]);
+        return view('livewire.patients.patient-abonne-page',['patients'=>$patients]);
     }
 }

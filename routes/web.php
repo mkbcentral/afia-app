@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\TestController;
+use App\Http\Livewire\Patients\PatientAbonnePage;
+use App\Http\Livewire\Patients\PatientPersonnelPage;
 use App\Http\Livewire\Patients\PatientPrivePage;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +27,5 @@ Route::controller(TestController::class)->group(function(){
 });
 
 Route::get('patient-prive',PatientPrivePage::class)->name('patient.prive');
+Route::get('patient-abonne',PatientAbonnePage::class)->name('patient.abonne');
+Route::get('patient-personel',PatientPersonnelPage::class)->name('patient.personnel');
