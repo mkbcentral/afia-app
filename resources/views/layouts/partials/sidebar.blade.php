@@ -22,7 +22,7 @@
                       </p>
                     </a>
                     <ul class="nav nav-treeview" >
-                        <x-nav-link  class="nav-link" href="">
+                        <x-nav-link  class="nav-link" href="{{ route('patient.prive') }}" :active="request()->routeIs('patient.prive')">
                             <i class="fas fa-user-shield"></i> Privés
                         </x-nav-link>
                         <x-nav-link  class="nav-link" href="">
