@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TestController;
+use App\Http\Livewire\Patients\PatientPrivePage;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +23,5 @@ Route::controller(TestController::class)->group(function(){
     Route::get('test','test');
     Route::get('test2','test2');
 });
+
+Route::get('patient-prive',PatientPrivePage::class)->name('patient.prive');
