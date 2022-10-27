@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\TestController;
-use App\Http\Livewire\Admin\ConfigPage;
+use App\Http\Livewire\Admin\OtherConfigPage;
 use App\Http\Livewire\Patients\PatientAbonnePage;
 use App\Http\Livewire\Patients\PatientPersonnelPage;
 use App\Http\Livewire\Patients\PatientPrivePage;
@@ -30,4 +30,4 @@ Route::controller(TestController::class)->group(function(){
 Route::get('patient-prive',PatientPrivePage::class)->name('patient.prive');
 Route::get('patient-abonne',PatientAbonnePage::class)->name('patient.abonne');
 Route::get('patient-personel',PatientPersonnelPage::class)->name('patient.personnel');
-Route::get('configuration',ConfigPage::class)->name('configuration');
+Route::get('configuration',OtherConfigPage::class)->name('configuration');

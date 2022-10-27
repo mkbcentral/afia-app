@@ -9,6 +9,7 @@ window.$(document).ready(function () {
         $('#formPatientPrive').modal('hide');
         $('#formPatientAbonne').modal('hide');
         $('#formPatientPersonnel').modal('hide');
+        $('#formAbonnemnt').modal('hide');
     });
     window.addEventListener('data-updated', function (event) {
         toastr.info(event.detail.message, 'Validation');
@@ -16,6 +17,7 @@ window.$(document).ready(function () {
         $('#formEditFicheNumber').modal('hide');
         $('#formPatientAbonne').modal('hide');
         $('#formPatientPersonnel').modal('hide');
+        $('#formAbonnemnt').modal('hide');
     });
     window.addEventListener('data-deleted', function (event) {
         toastr.error(event.detail.message, 'Alert !');
