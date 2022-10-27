@@ -10,7 +10,7 @@ class PersonnelService extends Model
 {
     use HasFactory;
     protected $guarded=[];
-    public function patinets(): HasMany
+    public function patients(): HasMany
     {
         return $this->hasMany(PatientPersonnel::class);
     }

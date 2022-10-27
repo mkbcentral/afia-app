@@ -1,4 +1,4 @@
-<div>
+<div wire:ignore.self>
     <div>
         <div class="d-flex justify-content-between">
             <h3>LISTE DES ABONNEMENTS</h3>
@@ -34,10 +34,6 @@
                 @endforeach
             </tbody>
         </table>
-        <div>
-            {{$abonnements->links('vendor.livewire.bootstrap')}}
-        </div>
-
     </div>
     @include('livewire.admin.modals.form-abonnement')
 </div>

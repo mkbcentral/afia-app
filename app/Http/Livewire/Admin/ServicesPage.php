@@ -19,13 +19,10 @@ class ServicesPage extends Component
 
     public function store(){
         Validator::make(
-            $this->state,
-            [
-                'name'=>'required',
-            ]
+            $this->state,['name'=>'required']
         )->validate();
         PersonnelService::create($this->state);
-        $this->dispatchBrowserEvent('data-added',['message'=>'Abonnement bien créé']);
+        $this->dispatchBrowserEvent('data-added',['message'=>'Service bien créé']);
     }
 
     public function edit(PersonnelService $service){
@@ -43,7 +40,6 @@ class ServicesPage extends Component
         }
 
     }
-
     public function update(){
         $this->serviceToEdit->name=$this->state['name'];
         $this->serviceToEdit->update();
@@ -51,7 +47,7 @@ class ServicesPage extends Component
     }
     public function render()
     {
-        $Services=PersonnelService::paginate(5);
-        return view('livewire.admin.services-page');
+        $services=PersonnelService::with('patients')->get();
+        return view('livewire.admin.services-page',['services'=>$services]);
     }
 }

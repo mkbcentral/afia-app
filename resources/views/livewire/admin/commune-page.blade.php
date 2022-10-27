@@ -1,12 +1,12 @@
 <div wire:ignore.self>
     <div>
         <div class="d-flex justify-content-between">
-            <h3>LISTE DES TYPES DU PATIENT</h3>
+            <h3>LISTE DES COMMUNES</h3>
             <button class="btn btn-info btn-sm" type="button" wire:click.prevent='resetPRoperties'
-                data-toggle="modal" data-target="#formType">Créer...</button>
+                data-toggle="modal" data-target="#formCommune">Créer...</button>
         </div>
 
-        @if ($types->isEmpty())
+        @if ($communes->isEmpty())
             <div class="text-center mt-4 p-4">
                 <h3 class="text-success"><i class="fa fa-database" aria-hidden="true"></i> Aucune donnée trouvée</h3>
             </div>
@@ -20,16 +20,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($types as $index => $type)
+                    @foreach ($communes as $index => $commune)
                         <tr>
                             <td  class="text-center">{{$index+1}}</td>
-                            <td>{{$type->name}}</td>
+                            <td>{{$commune->name}}</td>
                             <td  class="text-center">
-                                <button wire:click.prevent='edit({{$type}})' data-toggle="modal" data-target="#formType"
+                                <button wire:click.prevent='edit({{$commune}})' data-toggle="modal" data-target="#formCommune"
                                     wire:click.prevent='' class="btn btn-link btn-sm"
-                                    type="button"><i class="fas fa-edit    "></i>
+                                    commune="button"><i class="fas fa-edit    "></i>
                                 </button>
-                                <button wire:click.prevent='delete({{$type}})' class="btn btn-link btn-sm" type="button">
+                                <button wire:click.prevent='delete({{$commune}})' class="btn btn-link btn-sm" type="button">
                                     <i class="fas fa-trash text-danger"></i>
                                 </button>
                             </td>
@@ -39,5 +39,5 @@
             </table>
         @endif
     </div>
-    @include('livewire.admin.modals.form-type')
+    @include('livewire.admin.modals.form-commune')
 </div>

@@ -33,6 +33,11 @@
                            Type patient
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#commune" data-toggle="tab">
+                           Communes
+                        </a>
+                    </li>
                 </ul>
                 </div><!-- /.card-header -->
                 <div class="card-body">
@@ -41,14 +46,13 @@
                         @livewire('admin.abonnement-page')
                     </div>
                     <div class=" tab-pane" id="services">
-                        <div>
-                            Service
-                        </div>
+                        @livewire('admin.services-page')
                     </div>
                     <div class=" tab-pane" id="types">
-                        <div>
-                            Type
-                        </div>
+                        @livewire('admin.type-patient-page')
+                    </div>
+                    <div class=" tab-pane" id="commune">
+                        @livewire('admin.commune-page')
                     </div>
                 </div>
                 <!-- /.tab-content -->

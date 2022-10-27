@@ -19,10 +19,7 @@ class AbonnementPage extends Component
 
     public function store(){
         Validator::make(
-            $this->state,
-            [
-                'name'=>'required',
-            ]
+            $this->state,['name'=>'required']
         )->validate();
         Abonnement::create($this->state);
         $this->dispatchBrowserEvent('data-added',['message'=>'Abonnement bien créé']);
@@ -51,7 +48,7 @@ class AbonnementPage extends Component
     }
     public function render()
     {
-        $abonnements=Abonnement::paginate(5);
+        $abonnements=Abonnement::with('patients')->get();
         return view('livewire.admin.abonnement-page',['abonnements'=>$abonnements]);
     }
 }
