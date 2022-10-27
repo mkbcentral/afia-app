@@ -85,7 +85,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <x-label value="{{ __('Avenue de residence') }}" />
+                            <x-input class="" type='text'
+                                     placeholder="Avenu" wire:model.defer='state.avenue'/>
+                            @error('avenue') <span class="error text-danger">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
                         <div class="form-group">
                             <x-label value="{{ __('Numero de residence') }}" />
                             <x-input class="" type='text'
@@ -93,7 +101,6 @@
                             @error('numero') <span class="error text-danger">{{ $message }}</span> @enderror
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="modal-footer">

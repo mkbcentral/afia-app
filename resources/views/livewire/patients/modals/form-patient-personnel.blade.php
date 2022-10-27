@@ -87,6 +87,14 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
+                            <x-label value="{{ __('Avenue de residence') }}" />
+                            <x-input class="" type='text'
+                                     placeholder="Avenu" wire:model.defer='state.avenue'/>
+                            @error('avenue') <span class="error text-danger">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
                             <x-label value="{{ __('Numero de residence') }}" />
                             <x-input class="" type='text'
                                      placeholder="Numero" wire:model.defer='state.numero'/>
@@ -105,7 +113,10 @@
                             @error('personnel_service_id') <span class="error text-danger">{{ $message }}</span> @enderror
                         </div>
                     </div>
-                    <div class="col-md-4">
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="my-select">Type patient</label>
                             <select id="my-select" class="form-control" wire:model.defer='state.type'>

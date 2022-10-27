@@ -24,7 +24,7 @@ class PatientPrivePage extends Component
             $fiche=(new FicheHelper())->create($this->state['fiche_number'],$this->type,$this->source);
             $patient=(new PatientHelper())
                 ->create("",$this->state['name'],$this->state['gender'],$this->state['date_of_birth'],
-                    $this->state['phone'],$this->state['commune'],$this->state['quartier'],
+                    $this->state['phone'],$this->state['commune'],$this->state['avenue'],$this->state['quartier'],
                     $this->state['numero'],'',$fiche->id,0,0,false);
             $this->dispatchBrowserEvent('data-added',['message'=>'Pateint '.$patient->name.' bien ajouté !']);
         }
@@ -41,7 +41,7 @@ class PatientPrivePage extends Component
     public function update(){
         $patient=(new PatientHelper())
                 ->update($this->patientToEdit->id,"",$this->state['name'],$this->state['gender'],$this->state['date_of_birth'],
-                    $this->state['phone'],$this->state['commune'],$this->state['quartier'],
+                    $this->state['phone'],$this->state['commune'],$this->state['avenue'],$this->state['quartier'],
                     $this->state['numero'],'',0,0,0,false);
         $this->dispatchBrowserEvent('data-updated',['message'=>'Pateint '.$patient->name.' bien mis à jour !']);
     }
@@ -71,6 +71,7 @@ class PatientPrivePage extends Component
                 'gender'=>'required',
                 'date_of_birth'=>'required|date',
                 'phone'=>'required',
+                'avenue'=>'required',
                 'commune'=>'required',
                 'numero'=>'required|numeric',
                 'quartier'=>'required',
@@ -83,6 +84,7 @@ class PatientPrivePage extends Component
     public function resetPropreties(){
         $this->state['commune']="Aucune";
         $this->state['quartier']="Aucun";
+        $this->state['avenue']="Aucun";
         $this->state['numero']=0;
         $this->state['phone']="+243";
         $this->isEditable=false;

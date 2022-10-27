@@ -7,12 +7,10 @@
     <div class="sidebar">
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-item">
-                    <x-nav-link class="nav-link" href="">
-                        &#x1F4C8;
-                        Dashboard
-                    </x-nav-link>
-                </li>
+                <x-nav-link class="nav-link" href="">
+                    &#x1F4C8;
+                    Dashboard
+                </x-nav-link>
                 <li class="nav-item" >
                     <a href="#" class="nav-link bg-secondary" >
                         &#x1F5C3;
@@ -33,6 +31,10 @@
                         </x-nav-link>
                     </ul>
                 </li>
+                <x-nav-link class="nav-link" href="{{ route('configuration') }}" :active="request()->routeIs('configuration')">
+                    <i class="fab fa-cogs text-dark"></i>
+                    Configuration
+                </x-nav-link>
 
             </ul>
         </nav>

@@ -6,7 +6,7 @@ use App\Models\PatientPersonnel;
 use App\Models\PatientPrive;
     class PatientHelper{
         //Create new Patient
-        public function create($matricule="",$name,$gender,$date_of_birth,$phone,$commune,$quartier,$numero,$type='',$fiche_id=0,$service_id=0,$abonnement_id=0,$is_prodeo=false){
+        public function create($matricule="",$name,$gender,$date_of_birth,$phone,$commune,$quartier,$avenue,$numero,$type='',$fiche_id=0,$service_id=0,$abonnement_id=0,$is_prodeo=false){
             if ($matricule==""&& $type=='' && $service_id==0 && $abonnement_id==0) {
                 //Create private patient
                 $patient=new PatientPrive();
@@ -53,7 +53,7 @@ use App\Models\PatientPrive;
         }
 
         //Update patient
-        public function update($id,$matricule="",$name,$gender,$date_of_birth,$phone,$commune,$quartier,$numero,$type='',$fiche_id=0,$service_id=0,$abonnement_id=0,$is_prodeo=false){
+        public function update($id,$matricule="",$name,$gender,$date_of_birth,$phone,$commune,$quartier,$avenue,$numero,$type='',$fiche_id=0,$service_id=0,$abonnement_id=0,$is_prodeo=false){
             if ($matricule==""&& $type=='' && $service_id==0 && $abonnement_id==0) {
                 //Create private patient
                 $patient= PatientPrive::find($id);
@@ -63,6 +63,7 @@ use App\Models\PatientPrive;
                 $patient->phone=$phone;
                 $patient->commune=$commune;
                 $patient->quartier=$quartier;
+                $patient->avenue=$avenue;
                 $patient->numero=$numero;
                 $patient->is_prodeo=$is_prodeo;
             } else if($service_id==0){
@@ -73,6 +74,7 @@ use App\Models\PatientPrive;
                 $patient->gender=$gender;
                 $patient->date_of_birth=$date_of_birth;
                 $patient->phone=$phone;
+                $patient->avenue=$avenue;
                 $patient->commune=$commune;
                 $patient->quartier=$quartier;
                 $patient->numero=$numero;
@@ -87,6 +89,7 @@ use App\Models\PatientPrive;
                 $patient->date_of_birth=$date_of_birth;
                 $patient->phone=$phone;
                 $patient->commune=$commune;
+                $patient->avenue=$avenue;
                 $patient->quartier=$quartier;
                 $patient->numero=$numero;
                 $patient->type=$type;
