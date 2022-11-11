@@ -38,6 +38,6 @@ Route::get('configuration',OtherConfigPage::class)->name('configuration');
 
 //Tarifications routes
 Route::get('tarification-labo',LaboPage::class)->name('tarification.labo');
-Route::get('tarification-radio',EchoPage::class)->name('tarification.radio');
-Route::get('tarification-echo',RadioPage::class)->name('tarification.echo');
+Route::get('tarification-radio',RadioPage::class)->name('tarification.radio');
+Route::get('tarification-echo',EchoPage::class)->name('tarification.echo');
 
