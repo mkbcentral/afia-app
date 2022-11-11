@@ -41,8 +41,7 @@ class StorePatientAbonne extends Command
             foreach ($iteratorCell as $cell) {
                $cells[]=$cell->getValue();
             }
-            dd($cells);
-            /*
+
             PatientAbonne::create([
                 'matricule'=>$cells[0],
                 'name'=>$cells[1].' '.$cells[2].' '.$cells[3],
@@ -51,12 +50,13 @@ class StorePatientAbonne extends Command
                 'phone'=>$cells[6],
                 'commune'=>$cells[7],
                 'quartier'=>$cells[8],
-                'numero'=>$cells[9],
-                'type'=>$cells[10],
-                'fiche_id'=>$cells[11],
-                'abonnement_id'=>$cells[12],
+                'avenue'=>$cells[9],
+                'numero'=>$cells[10],
+                'type'=>$cells[11],
+                'fiche_id'=>$cells[12],
+                'abonnement_id'=>$cells[13],
             ]);
-            */
+
 
         }
         $this->comment("Patints bien importées");

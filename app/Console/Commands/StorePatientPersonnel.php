@@ -2,28 +2,27 @@
 
 namespace App\Console\Commands;
 
-use App\Models\PatientPrive;
+use App\Models\PatientPersonnel;
 use Carbon\Carbon;
-use DateTime;
 use Illuminate\Console\Command;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class StorePatientPrive extends Command
+class StorePatientPersonnel extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'store:patient-prive';
+    protected $signature = 'store:patient-personnel';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Cette commande sert à importer les patient privés sur un fichier excel';
+    protected $description = "Cette commande permet d'importer les fiches des patients perspnnels";
 
     /**
      * Execute the console command.
@@ -33,7 +32,7 @@ class StorePatientPrive extends Command
     public function handle()
     {
         $counter=0;
-        $worksheet=$this->getActiveSheet(storage_path('data/patients_prives.xlsx'));
+        $worksheet=$this->getActiveSheet(storage_path('data/patients_personnels.xlsx'));
         foreach ($worksheet->getRowIterator() as $row) {
             if($counter++ ==0) continue;
             $iteratorCell=$row->getCellIterator();
@@ -42,18 +41,22 @@ class StorePatientPrive extends Command
             foreach ($iteratorCell as $cell) {
                $cells[]=$cell->getValue();
             }
-
-
-            PatientPrive::create([
+            dump($cells);
+            /*
+            PatientPersonnel::create([
                 'name'=>$cells[0].' '.$cells[1].' '.$cells[2],
                 'gender'=>$cells[3],
                 'date_of_birth'=>$cells[4]=='NULL'?date('Y-m-d'): Carbon::createFromFormat('d/m/Y', $cells[4])->format('Y-m-d'),
                 'phone'=>$cells[5],
                 'commune'=>$cells[6],
                 'quartier'=>$cells[7],
-                'numero'=>$cells[8],
-                'fiche_id'=>$cells[10],
+                'avenue'=>$cells[8],
+                'numero'=>$cells[9],
+                'type'=>$cells[10],
+                'fiche_id'=>$cells[11],
+                'personnel_service_id '=>$cells[12],
             ]);
+            */
 
 
         }
