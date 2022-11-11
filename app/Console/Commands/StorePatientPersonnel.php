@@ -42,7 +42,7 @@ class StorePatientPersonnel extends Command
                $cells[]=$cell->getValue();
             }
             dump($cells);
-            /*
+
             PatientPersonnel::create([
                 'name'=>$cells[0].' '.$cells[1].' '.$cells[2],
                 'gender'=>$cells[3],
@@ -52,11 +52,11 @@ class StorePatientPersonnel extends Command
                 'quartier'=>$cells[7],
                 'avenue'=>$cells[8],
                 'numero'=>$cells[9],
-                'type'=>$cells[10],
-                'fiche_id'=>$cells[11],
-                'personnel_service_id '=>$cells[12],
+                'type'=>$cells[12],
+                'fiche_id'=>$cells[10],
+                'personnel_service_id'=>$cells[11],
             ]);
-            */
+
 
 
         }
