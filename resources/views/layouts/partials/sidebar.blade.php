@@ -16,7 +16,7 @@
                     <i class="fab fa-cogs text-dark"></i>
                     Configuration
                 </x-nav-link>
-
+                <x-nav-tarification/>
             </ul>
         </nav>
     </div>
