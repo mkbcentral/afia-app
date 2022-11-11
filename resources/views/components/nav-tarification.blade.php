@@ -13,7 +13,7 @@
         <x-nav-link  class="nav-link" href="{{ route('tarification.radio') }}" :active="request()->routeIs('tarification.radio')">
              Radiologie
         </x-nav-link>
-        <x-nav-link  class="nav-link" href="{{ route('tarification.echo') }}" :active="request()->routeIs('tarification.labo')">
+        <x-nav-link  class="nav-link" href="{{ route('tarification.echo') }}" :active="request()->routeIs('tarification.echo')">
              Echographie
         </x-nav-link>
     </ul>

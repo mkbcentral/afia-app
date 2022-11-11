@@ -33,7 +33,7 @@
             </div>
             @if ($patients->isEmpty())
                 <div class="text-center mt-4 p-4">
-                    <h3 class="text-success"><i class="fa fa-database" aria-hidden="true"></i> Aunce patient trouvé</h3>
+                    <h3 class="text-success"><i class="fa fa-database" aria-hidden="true"></i> Aucun patient trouvé</h3>
                 </div>
             @else
                 <table class="table table-striped table-sm">

@@ -13,6 +13,7 @@ window.$(document).ready(function () {
         $('#formService').modal('hide');
         $('#formType').modal('hide');
         $('#formCommune').modal('hide');
+        $('#formTarification').modal('hide');
     });
     window.addEventListener('data-updated', function (event) {
         toastr.info(event.detail.message, 'Validation');
@@ -24,6 +25,7 @@ window.$(document).ready(function () {
         $('#formService').modal('hide');
         $('#formType').modal('hide');
         $('#formCommune').modal('hide');
+        $('#formTarification').modal('hide');
     });
     window.addEventListener('data-deleted', function (event) {
         toastr.error(event.detail.message, 'Alert !');
