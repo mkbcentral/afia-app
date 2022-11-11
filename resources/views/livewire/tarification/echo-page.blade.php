@@ -63,7 +63,7 @@
 
                                 </div>
                             </div>
-                            @if ($labos->isEmpty())
+                            @if ($echos->isEmpty())
                             <div class="text-center mt-4 p-4 ">
                                 <h3 class="text-success"><i class="fa fa-database" aria-hidden="true"></i> Aucune donnée trouvée</h3>
                             </div>
@@ -79,18 +79,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($labos as $index => $labo)
+                                    @foreach ($echos as $index => $echo)
                                         <tr>
                                             <td>{{$index+1}}</td>
-                                            <td>{{$labo->abreviation=="Aucune"?$labo->name:$labo->abreviation}}</td>
-                                            <td class="text-center">{{$labo->price_prive}}</td>
-                                            <td class="text-center">{{$labo->price_abonne}}</td>
+                                            <td>{{$echo->abreviation=="Aucune"?$echo->name:$echo->abreviation}}</td>
+                                            <td class="text-center">{{$echo->price_prive}}</td>
+                                            <td class="text-center">{{$echo->price_abonne}}</td>
                                             <td class="text-center">
                                                 <button data-toggle="modal" data-target="#formTarification"
-                                                    wire:click.prevent='edit({{$labo}})' class="btn btn-link btn-sm"
+                                                    wire:click.prevent='edit({{$echo}})' class="btn btn-link btn-sm"
                                                     type="button"><i class="fas fa-edit    "></i>
                                                 </button>
-                                                <button wire:click.prevent='showDeleteDialog({{$labo}})'
+                                                <button wire:click.prevent='showDeleteDialog({{$echo}})'
                                                     class="btn btn-link btn-sm" type="button">
                                                     <i class="fas fa-trash text-danger"></i>
                                                 </button>

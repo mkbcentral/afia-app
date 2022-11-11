@@ -5,7 +5,7 @@
                 <div class="col-sm-10">
                     <div class="text-center">
                         <img src="{{ asset('logo.png') }}" alt="" width="60px">
-                        <h1 class="m-0  text-primary text-uppercase">  Tarification de la consultation</h1>
+                        <h1 class="m-0  text-primary text-uppercase">  Tarification des autres élements</h1>
                     </div>
 
                 </div>
@@ -17,7 +17,9 @@
                 <div class="d-flex justify-content-center">
                     <div class="w-75">
                         <div class="d-flex justify-content-between">
-                            <h4><i class="fas fa-list"></i> {{$isTrashed==false?'LISTE DES CONSULTATIONS':'LISTE DES CONSULTATIONS DANS LA CORBEILLE';}}</h4>
+                            <h4><i class="fas fa-list"></i>
+                                {{$isTrashed==false?'LISTE DES AUTRES ELEMENTS':'LISTE DES AUTRES ELEMENTS DANS LA CORBEILLE';}}
+                            </h4>
                             <button class="btn btn-info btn-sm" type="button" wire:click.prevent="resetPropreties"
                                 data-toggle="modal" data-target="#formTarification">
                                 <i class="fas fa-plus-circle"></i> Nouveau
@@ -61,7 +63,7 @@
 
                                 </div>
                             </div>
-                            @if ($consultations->isEmpty())
+                            @if ($autres->isEmpty())
                             <div class="text-center mt-4 p-4 ">
                                 <h3 class="text-success"><i class="fa fa-database" aria-hidden="true"></i> Aucune donnée trouvée</h3>
                             </div>
@@ -77,18 +79,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($consultations as $index => $consultation)
+                                    @foreach ($autres as $index => $autre)
                                         <tr>
                                             <td>{{$index+1}}</td>
-                                            <td>{{$consultation->abreviation=="Aucune"?$consultation->name:$consultation->abreviation}}</td>
-                                            <td class="text-center">{{$consultation->price_prive}}</td>
-                                            <td class="text-center">{{$consultation->price_abonne}}</td>
+                                            <td>{{$autre->abreviation=="Aucune"?$autre->name:$autre->abreviation}}</td>
+                                            <td class="text-center">{{$autre->price_prive}}</td>
+                                            <td class="text-center">{{$autre->price_abonne}}</td>
                                             <td class="text-center">
                                                 <button data-toggle="modal" data-target="#formTarification"
-                                                    wire:click.prevent='edit({{$consultation}})' class="btn btn-link btn-sm"
+                                                    wire:click.prevent='edit({{$autre}})' class="btn btn-link btn-sm"
                                                     type="button"><i class="fas fa-edit    "></i>
                                                 </button>
-                                                <button wire:click.prevent='showDeleteDialog({{$consultation}})'
+                                                <button wire:click.prevent='showDeleteDialog({{$autre}})'
                                                     class="btn btn-link btn-sm" type="button">
                                                     <i class="fas fa-trash text-danger"></i>
                                                 </button>

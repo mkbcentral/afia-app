@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire\Tarification;
 
-use App\Models\Consultation;
+use App\Models\Sejour;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 
-class ConsultationPage extends Component
+class SejourPage extends Component
 {
-    public $isEditable=false,$isTrashed=false,$state=[],$consultationToEdit,$consultationToDelete,$keySearch="";
+    public $isEditable=false,$isTrashed=false,$state=[],$sejourToEdit,$sejourToDelete,$keySearch="";
     protected $listeners=['tarificationListener'=>'delete'];
     public function resetPropreties(){
         $this->isEditable=false;
@@ -28,45 +28,45 @@ class ConsultationPage extends Component
             ]
 
         )->validate();
-        $consultation=new Consultation();
-        $consultation->name=$this->state['name'];
-        $consultation->abreviation=$this->state['abreviation'];
-        $consultation->price_prive=$this->state['price_prive'];
-        $consultation->price_abonne=$this->state['price_abonne'];
-        $consultation->save();
+        $sejour=new Sejour();
+        $sejour->name=$this->state['name'];
+        $sejour->abreviation=$this->state['abreviation'];
+        $sejour->price_prive=$this->state['price_prive'];
+        $sejour->price_abonne=$this->state['price_abonne'];
+        $sejour->save();
         $this->dispatchBrowserEvent('data-added',['message'=>'Infos bien sauvegardée !']);
     }
     public function mount(){
         $this->state['abreviation']="Aucune";
     }
 
-    public function edit(Consultation $consultation){
-        $this->state=$consultation->toArray();
+    public function edit(Sejour $sejour){
+        $this->state=$sejour->toArray();
         $this->isEditable=true;
-        $this->consultationToEdit=$consultation;
+        $this->sejourToEdit=$sejour;
     }
 
     public function update(){
-        $this->consultationToEdit->name=$this->state['name'];
-        $this->consultationToEdit->abreviation=$this->state['abreviation'];
-        $this->consultationToEdit->price_prive=$this->state['price_prive'];
-        $this->consultationToEdit->price_abonne=$this->state['price_abonne'];
-        $this->consultationToEdit->update();
+        $this->sejourToEdit->name=$this->state['name'];
+        $this->sejourToEdit->abreviation=$this->state['abreviation'];
+        $this->sejourToEdit->price_prive=$this->state['price_prive'];
+        $this->sejourToEdit->price_abonne=$this->state['price_abonne'];
+        $this->sejourToEdit->update();
         $this->dispatchBrowserEvent('data-added',['message'=>'Infos bien mise à jour !']);
     }
 
-    public function showDeleteDialog(Consultation $consultation){
+    public function showDeleteDialog(Sejour $sejour){
         $this->dispatchBrowserEvent('delete-tarification-dialog');
-        $this->consultationToDelete=$consultation;
+        $this->sejourToDelete=$sejour;
     }
 
     public function delete(){
-       if ($this->consultationToDelete->changed==true) {
-            $this->consultationToDelete->changed=false;
+       if ($this->sejourToDelete->changed==true) {
+            $this->sejourToDelete->changed=false;
        } else {
-            $this->consultationToDelete->changed=true;
+            $this->sejourToDelete->changed=true;
        }
-       $this->consultationToDelete->update();
+       $this->sejourToDelete->update();
        $this->dispatchBrowserEvent('data-dialog-deleted',['message'=>"Action réalisée avec succès !"]);
     }
     public function getTrashed(){
@@ -79,16 +79,16 @@ class ConsultationPage extends Component
     public function render()
     {
         if ($this->isTrashed==false) {
-            $consultations=Consultation::where('changed',false)
+            $sejours=Sejour::where('changed',false)
             ->where('name','like','%'.$this->keySearch.'%')
             ->orderBy('name','ASC')
             ->get();
         } else {
-            $consultations=Consultation::where('changed',true)
+            $sejours=Sejour::where('changed',true)
             ->where('name','like','%'.$this->keySearch.'%')
             ->orderBy('name','ASC')
             ->get();
         }
-        return view('livewire.tarification.consultation-page',['consultations'=>$consultations]);
+        return view('livewire.tarification.sejour-page',['sejours'=>$sejours]);
     }
 }

@@ -81,17 +81,15 @@ class RadioPage extends Component
         if ($this->isTrashed==false) {
             $radios=ExamenRadio::where('changed',false)
             ->where('name','like','%'.$this->keySearch.'%')
-            ->Where('abreviation','like','%'.$this->keySearch.'%')
             ->orderBy('name','ASC')
             ->get();
         } else {
             $radios=ExamenRadio::where('changed',true)
             ->where('name','like','%'.$this->keySearch.'%')
-            ->Where('abreviation','like','%'.$this->keySearch.'%')
             ->orderBy('name','ASC')
             ->get();
         }
 
-        return view('livewire.tarification.radio-page',['labos'=>$radios]);
+        return view('livewire.tarification.radio-page',['radios'=>$radios]);
     }
 }

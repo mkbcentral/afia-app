@@ -6,10 +6,12 @@ use App\Http\Livewire\Patients\PatientAbonnePage;
 use App\Http\Livewire\Patients\PatientPersonnelPage;
 use App\Http\Livewire\Patients\PatientPrivePage;
 use App\Http\Livewire\Tarification\ActePage;
+use App\Http\Livewire\Tarification\AutrePage;
 use App\Http\Livewire\Tarification\ConsultationPage;
 use App\Http\Livewire\Tarification\EchoPage;
 use App\Http\Livewire\Tarification\LaboPage;
 use App\Http\Livewire\Tarification\RadioPage;
+use App\Http\Livewire\Tarification\SejourPage;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,5 +45,7 @@ Route::get('tarification-labo',LaboPage::class)->name('tarification.labo');
 Route::get('tarification-radio',RadioPage::class)->name('tarification.radio');
 Route::get('tarification-echo',EchoPage::class)->name('tarification.echo');
 Route::get('tarification-consultation',ConsultationPage::class)->name('tarification.consultation');
-Route::get('tarification-acte',ActePage::class)->name('tarification.acte');
+Route::get('tarification-actes',ActePage::class)->name('tarification.acte');
+Route::get('tarification-sejour',SejourPage::class)->name('tarification.sejour');
+Route::get('tarification-autres',AutrePage::class)->name('tarification.autre');
 

@@ -82,13 +82,11 @@ class LaboPage extends Component
         if ($this->isTrashed==false) {
             $labos=ExamenLabo::where('changed',false)
             ->where('name','like','%'.$this->keySearch.'%')
-            ->Where('abreviation','like','%'.$this->keySearch.'%')
             ->orderBy('name','ASC')
             ->get();
         } else {
             $labos=ExamenLabo::where('changed',true)
             ->where('name','like','%'.$this->keySearch.'%')
-            ->Where('abreviation','like','%'.$this->keySearch.'%')
             ->orderBy('name','ASC')
             ->get();
         }

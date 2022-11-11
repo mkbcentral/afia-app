@@ -81,13 +81,11 @@ class ActePage extends Component
         if ($this->isTrashed==false) {
             $actes=Acte::where('changed',false)
             ->where('name','like','%'.$this->keySearch.'%')
-            ->Where('abreviation','like','%'.$this->keySearch.'%')
             ->orderBy('name','ASC')
             ->get();
         } else {
             $actes=Acte::where('changed',true)
             ->where('name','like','%'.$this->keySearch.'%')
-            ->Where('abreviation','like','%'.$this->keySearch.'%')
             ->orderBy('name','ASC')
             ->get();
         }

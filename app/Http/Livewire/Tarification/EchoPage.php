@@ -81,16 +81,14 @@ class EchoPage extends Component
         if ($this->isTrashed==false) {
             $echos=ExamenEcho::where('changed',false)
             ->where('name','like','%'.$this->keySearch.'%')
-            ->Where('abreviation','like','%'.$this->keySearch.'%')
             ->orderBy('name','ASC')
             ->get();
         } else {
             $echos=ExamenEcho::where('changed',true)
             ->where('name','like','%'.$this->keySearch.'%')
-            ->Where('abreviation','like','%'.$this->keySearch.'%')
             ->orderBy('name','ASC')
             ->get();
         }
-        return view('livewire.tarification.echo-page',['labos'=>$echos]);
+        return view('livewire.tarification.echo-page',['echos'=>$echos]);
     }
 }

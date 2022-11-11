@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire\Tarification;
 
-use App\Models\Consultation;
+use App\Models\Autre;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 
-class ConsultationPage extends Component
+class AutrePage extends Component
 {
-    public $isEditable=false,$isTrashed=false,$state=[],$consultationToEdit,$consultationToDelete,$keySearch="";
+    public $isEditable=false,$isTrashed=false,$state=[],$autreToEdit,$autreToDelete,$keySearch="";
     protected $listeners=['tarificationListener'=>'delete'];
     public function resetPropreties(){
         $this->isEditable=false;
@@ -28,45 +28,45 @@ class ConsultationPage extends Component
             ]
 
         )->validate();
-        $consultation=new Consultation();
-        $consultation->name=$this->state['name'];
-        $consultation->abreviation=$this->state['abreviation'];
-        $consultation->price_prive=$this->state['price_prive'];
-        $consultation->price_abonne=$this->state['price_abonne'];
-        $consultation->save();
+        $autre=new Autre();
+        $autre->name=$this->state['name'];
+        $autre->abreviation=$this->state['abreviation'];
+        $autre->price_prive=$this->state['price_prive'];
+        $autre->price_abonne=$this->state['price_abonne'];
+        $autre->save();
         $this->dispatchBrowserEvent('data-added',['message'=>'Infos bien sauvegardée !']);
     }
     public function mount(){
         $this->state['abreviation']="Aucune";
     }
 
-    public function edit(Consultation $consultation){
-        $this->state=$consultation->toArray();
+    public function edit(Autre $autre){
+        $this->state=$autre->toArray();
         $this->isEditable=true;
-        $this->consultationToEdit=$consultation;
+        $this->autreToEdit=$autre;
     }
 
     public function update(){
-        $this->consultationToEdit->name=$this->state['name'];
-        $this->consultationToEdit->abreviation=$this->state['abreviation'];
-        $this->consultationToEdit->price_prive=$this->state['price_prive'];
-        $this->consultationToEdit->price_abonne=$this->state['price_abonne'];
-        $this->consultationToEdit->update();
+        $this->autreToEdit->name=$this->state['name'];
+        $this->autreToEdit->abreviation=$this->state['abreviation'];
+        $this->autreToEdit->price_prive=$this->state['price_prive'];
+        $this->autreToEdit->price_abonne=$this->state['price_abonne'];
+        $this->autreToEdit->update();
         $this->dispatchBrowserEvent('data-added',['message'=>'Infos bien mise à jour !']);
     }
 
-    public function showDeleteDialog(Consultation $consultation){
+    public function showDeleteDialog(Autre $autre){
         $this->dispatchBrowserEvent('delete-tarification-dialog');
-        $this->consultationToDelete=$consultation;
+        $this->autreToDelete=$autre;
     }
 
     public function delete(){
-       if ($this->consultationToDelete->changed==true) {
-            $this->consultationToDelete->changed=false;
+       if ($this->autreToDelete->changed==true) {
+            $this->autreToDelete->changed=false;
        } else {
-            $this->consultationToDelete->changed=true;
+            $this->autreToDelete->changed=true;
        }
-       $this->consultationToDelete->update();
+       $this->autreToDelete->update();
        $this->dispatchBrowserEvent('data-dialog-deleted',['message'=>"Action réalisée avec succès !"]);
     }
     public function getTrashed(){
@@ -79,16 +79,16 @@ class ConsultationPage extends Component
     public function render()
     {
         if ($this->isTrashed==false) {
-            $consultations=Consultation::where('changed',false)
+            $autres=Autre::where('changed',false)
             ->where('name','like','%'.$this->keySearch.'%')
             ->orderBy('name','ASC')
             ->get();
         } else {
-            $consultations=Consultation::where('changed',true)
+            $autres=Autre::where('changed',true)
             ->where('name','like','%'.$this->keySearch.'%')
             ->orderBy('name','ASC')
             ->get();
         }
-        return view('livewire.tarification.consultation-page',['consultations'=>$consultations]);
+        return view('livewire.tarification.autre-page',['autres'=>$autres]);
     }
 }
