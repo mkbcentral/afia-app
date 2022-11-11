@@ -5,7 +5,7 @@
                 <div class="col-sm-10">
                     <div class="text-center">
                         <img src="{{ asset('logo.png') }}" alt="" width="60px">
-                        <h1 class="m-0  text-primary text-uppercase">  Tarification de la radiologie</h1>
+                        <h1 class="m-0  text-primary text-uppercase">  Tarification de la consultation</h1>
                     </div>
 
                 </div>
@@ -17,9 +17,7 @@
                 <div class="d-flex justify-content-center">
                     <div class="w-75">
                         <div class="d-flex justify-content-between">
-                            <h4><i class="fas fa-list"></i>
-                                {{$isTrashed==false?'LISTE DES EXAMENS DES RADIO':'LISTE DES EXAMENS DES RADIO DANS LA CORBEILLE';}}
-                            </h4>
+                            <h4><i class="fas fa-list"></i> {{$isTrashed==false?'LISTE DES CONSULTATIONS':'LISTE DES CONSULTATIONS DANS LA CORBEILLE';}}</h4>
                             <button class="btn btn-info btn-sm" type="button" wire:click.prevent="resetPropreties"
                                 data-toggle="modal" data-target="#formTarification">
                                 <i class="fas fa-plus-circle"></i> Nouveau

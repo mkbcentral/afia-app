@@ -7,6 +7,9 @@
       </p>
     </a>
     <ul class="nav nav-treeview" >
+        <x-nav-link  class="nav-link" href="{{ route('tarification.consultation') }}" :active="request()->routeIs('tarification.consultation')">
+            Consultation
+        </x-nav-link>
         <x-nav-link  class="nav-link" href="{{ route('tarification.labo') }}" :active="request()->routeIs('tarification.labo')">
              Laboratoire
         </x-nav-link>
@@ -16,5 +19,6 @@
         <x-nav-link  class="nav-link" href="{{ route('tarification.echo') }}" :active="request()->routeIs('tarification.echo')">
              Echographie
         </x-nav-link>
+
     </ul>
 </li>

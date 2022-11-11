@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire\Tarification;
 
-use App\Models\ExamenEcho;
+use App\Models\Consultation;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 
-class EchoPage extends Component
+class ConsultationPage extends Component
 {
-    public $isEditable=false,$isTrashed=false,$state=[],$echoToEdit,$echoToDelete,$keySearch="";
+    public $isEditable=false,$isTrashed=false,$state=[],$consultationToEdit,$consultationToDelete,$keySearch="";
     protected $listeners=['tarificationListener'=>'delete'];
     public function resetPropreties(){
         $this->isEditable=false;
@@ -28,45 +28,45 @@ class EchoPage extends Component
             ]
 
         )->validate();
-        $echo=new ExamenEcho();
-        $echo->name=$this->state['name'];
-        $echo->abreviation=$this->state['abreviation'];
-        $echo->price_prive=$this->state['price_prive'];
-        $echo->price_abonne=$this->state['price_abonne'];
-        $echo->save();
+        $consultation=new Consultation();
+        $consultation->name=$this->state['name'];
+        $consultation->abreviation=$this->state['abreviation'];
+        $consultation->price_prive=$this->state['price_prive'];
+        $consultation->price_abonne=$this->state['price_abonne'];
+        $consultation->save();
         $this->dispatchBrowserEvent('data-added',['message'=>'Infos bien sauvegardée !']);
     }
     public function mount(){
         $this->state['abreviation']="Aucune";
     }
 
-    public function edit(ExamenEcho $echo){
-        $this->state=$echo->toArray();
+    public function edit(Consultation $consultation){
+        $this->state=$consultation->toArray();
         $this->isEditable=true;
-        $this->echoToEdit=$echo;
+        $this->consultationToEdit=$consultation;
     }
 
     public function update(){
-        $this->echoToEdit->name=$this->state['name'];
-        $this->echoToEdit->abreviation=$this->state['abreviation'];
-        $this->echoToEdit->price_prive=$this->state['price_prive'];
-        $this->echoToEdit->price_abonne=$this->state['price_abonne'];
-        $this->echoToEdit->update();
+        $this->consultationToEdit->name=$this->state['name'];
+        $this->consultationToEdit->abreviation=$this->state['abreviation'];
+        $this->consultationToEdit->price_prive=$this->state['price_prive'];
+        $this->consultationToEdit->price_abonne=$this->state['price_abonne'];
+        $this->consultationToEdit->update();
         $this->dispatchBrowserEvent('data-added',['message'=>'Infos bien mise à jour !']);
     }
 
-    public function showDeleteDialog(ExamenEcho $echo){
+    public function showDeleteDialog(Consultation $consultation){
         $this->dispatchBrowserEvent('delete-tarification-dialog');
-        $this->echoToDelete=$echo;
+        $this->consultationToDelete=$consultation;
     }
 
     public function delete(){
-       if ($this->echoToDelete->changed==true) {
-            $this->echoToDelete->changed=false;
+       if ($this->consultationToDelete->changed==true) {
+            $this->consultationToDelete->changed=false;
        } else {
-            $this->echoToDelete->changed=true;
+            $this->consultationToDelete->changed=true;
        }
-       $this->echoToDelete->update();
+       $this->consultationToDelete->update();
        $this->dispatchBrowserEvent('data-dialog-deleted',['message'=>"Action réalisée avec succès !"]);
     }
     public function getTrashed(){
@@ -79,18 +79,18 @@ class EchoPage extends Component
     public function render()
     {
         if ($this->isTrashed==false) {
-            $echos=ExamenEcho::where('changed',false)
+            $consultations=Consultation::where('changed',false)
             ->where('name','like','%'.$this->keySearch.'%')
             ->Where('abreviation','like','%'.$this->keySearch.'%')
             ->orderBy('name','ASC')
             ->get();
         } else {
-            $echos=ExamenEcho::where('changed',true)
+            $consultations=Consultation::where('changed',true)
             ->where('name','like','%'.$this->keySearch.'%')
             ->Where('abreviation','like','%'.$this->keySearch.'%')
             ->orderBy('name','ASC')
             ->get();
         }
-        return view('livewire.tarification.echo-page',['labos'=>$echos]);
+        return view('livewire.tarification.consultation-page',['labos'=>$consultations]);
     }
 }

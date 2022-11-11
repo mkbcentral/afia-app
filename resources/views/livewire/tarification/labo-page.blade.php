@@ -17,7 +17,7 @@
                 <div class="d-flex justify-content-center">
                     <div class="w-75">
                         <div class="d-flex justify-content-between">
-                            <h4><i class="fas fa-list"></i> {{$isTrashed==false?'LISTE DES EXAMES DES LABO':'LISTE DES EXAMES DES LABO DANS LA CORBEILLE';}}</h4>
+                            <h4><i class="fas fa-list"></i> {{$isTrashed==false?'LISTE DES EXAMENS DES LABO':'LISTE DES EXAMENS DES LABO DANS LA CORBEILLE';}}</h4>
                             <button class="btn btn-info btn-sm" type="button" wire:click.prevent="resetPropreties"
                                 data-toggle="modal" data-target="#formTarification">
                                 <i class="fas fa-plus-circle"></i> Nouveau

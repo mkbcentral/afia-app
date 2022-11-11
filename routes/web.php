@@ -5,6 +5,7 @@ use App\Http\Livewire\Admin\OtherConfigPage;
 use App\Http\Livewire\Patients\PatientAbonnePage;
 use App\Http\Livewire\Patients\PatientPersonnelPage;
 use App\Http\Livewire\Patients\PatientPrivePage;
+use App\Http\Livewire\Tarification\ConsultationPage;
 use App\Http\Livewire\Tarification\EchoPage;
 use App\Http\Livewire\Tarification\LaboPage;
 use App\Http\Livewire\Tarification\RadioPage;
@@ -40,4 +41,5 @@ Route::get('configuration',OtherConfigPage::class)->name('configuration');
 Route::get('tarification-labo',LaboPage::class)->name('tarification.labo');
 Route::get('tarification-radio',RadioPage::class)->name('tarification.radio');
 Route::get('tarification-echo',EchoPage::class)->name('tarification.echo');
+Route::get('tarification-consultation',ConsultationPage::class)->name('tarification.consultation');
 
