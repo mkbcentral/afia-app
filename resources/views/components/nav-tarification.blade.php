@@ -19,6 +19,9 @@
         <x-nav-link  class="nav-link" href="{{ route('tarification.echo') }}" :active="request()->routeIs('tarification.echo')">
              Echographie
         </x-nav-link>
+        <x-nav-link  class="nav-link" href="{{ route('tarification.acte') }}" :active="request()->routeIs('tarification.acte')">
+            Acte
+       </x-nav-link>
 
     </ul>
 </li>
