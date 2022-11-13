@@ -60,9 +60,8 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <x-label value="{{ __('Date de naissance') }}" />
-                            <x-input class="" type='date'
-                                     placeholder="Date de naissance" wire:model.defer='state.date_of_birth'/>
+                            <x-label for="dateOfBirth" value="{{ __('Date de naissance') }}" />
+                            <x-date-picker wire:model.defer='state.date_of_birth' id="dateOfBirth"/>
                             @error('date_of_birth') <span class="error text-danger">{{ $message }}</span> @enderror
                         </div>
                     </div>
@@ -79,8 +78,13 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <x-label value="{{ __('Commune de residence') }}" />
-                            <x-input class=""
-                                     placeholder="Commune" wire:model.defer='state.commune'/>
+                            <select id="my-select" class="form-control" wire:model.defer='state.commune'>
+                                <option>Choisir...</option>
+                                    @foreach ($communes as $commune)
+                                        <option value="{{$commune->name}}">{{$commune->name}}</option>
+                                 @endforeach
+                            </select>
+
                             @error('commune') <span class="error text-danger">{{ $message }}</span> @enderror
                         </div>
                     </div>

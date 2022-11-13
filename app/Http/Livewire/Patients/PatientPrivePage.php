@@ -3,7 +3,9 @@
 namespace App\Http\Livewire\Patients;
 
 use App\Helpers\Fiches\FicheHelper;
+use App\Helpers\Others\DateFromatHelper;
 use App\Helpers\Patients\PatientHelper;
+use App\Models\Commune;
 use App\Models\PatientPrive;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
@@ -13,17 +15,18 @@ class PatientPrivePage extends Component
 {
     use WithPagination;
     public $state=[],$isEditable,$patientToEdit,$patientToDelete,$fiche_number_to_edit,$ficheToEdit;
-    public $type="Privé",$source="Golf",$keySearch="",$pageNumber=10;
+    public $type="Privé",$source="Golf",$keySearch="",$pageNumber=10,$communes;
     protected $listeners=['patientListener'=>'delete'];
 
     public function store(){
+        $date=(new DateFromatHelper())->formatDate($this->state['date_of_birth']);
         $this->valideForm();
         $patientChecked=(new PatientHelper())->chekIfPatientExist($this->state['name'],$this->state['date_of_birth'],$this->type);
         if ($patientChecked) {
         }else{
             $fiche=(new FicheHelper())->create($this->state['fiche_number'],$this->type,$this->source);
             $patient=(new PatientHelper())
-                ->create("",$this->state['name'],$this->state['gender'],$this->state['date_of_birth'],
+                ->create("",$this->state['name'],$this->state['gender'],$date,
                     $this->state['phone'],$this->state['commune'],$this->state['avenue'],$this->state['quartier'],
                     $this->state['numero'],'',$fiche->id,0,0,false);
             $this->dispatchBrowserEvent('data-added',['message'=>'Pateint '.$patient->name.' bien ajouté !']);
@@ -39,8 +42,9 @@ class PatientPrivePage extends Component
     }
 
     public function update(){
+        $date=(new DateFromatHelper())->formatDate($this->state['date_of_birth']);
         $patient=(new PatientHelper())
-                ->update($this->patientToEdit->id,"",$this->state['name'],$this->state['gender'],$this->state['date_of_birth'],
+                ->update($this->patientToEdit->id,"",$this->state['name'],$this->state['gender'],$date,
                     $this->state['phone'],$this->state['commune'],$this->state['avenue'],$this->state['quartier'],
                     $this->state['numero'],'',0,0,0,false);
         $this->dispatchBrowserEvent('data-updated',['message'=>'Pateint '.$patient->name.' bien mis à jour !']);
@@ -69,7 +73,7 @@ class PatientPrivePage extends Component
             [
                 'name'=>'required',
                 'gender'=>'required',
-                'date_of_birth'=>'required|date',
+                'date_of_birth'=>'required',
                 'phone'=>'required',
                 'avenue'=>'required',
                 'commune'=>'required',
@@ -91,13 +95,13 @@ class PatientPrivePage extends Component
     }
 
     public function mount(){
-
+        $this->communes=Commune::all();
     }
     public function render()
     {
         $patients=PatientPrive::where('name','like','%'.$this->keySearch.'%')
                 ->with('fiche')
-                ->orderBy('created_at','ASC')
+                ->orderBy('created_at','DESC')
                 ->paginate($this->pageNumber);
         return view('livewire.patients.patient-prive-page',['patients'=>$patients]);
     }

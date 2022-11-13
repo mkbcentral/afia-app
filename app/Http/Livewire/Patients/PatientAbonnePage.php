@@ -3,8 +3,10 @@
 namespace App\Http\Livewire\Patients;
 
 use App\Helpers\Fiches\FicheHelper;
+use App\Helpers\Others\DateFromatHelper;
 use App\Helpers\Patients\PatientHelper;
 use App\Models\Abonnement;
+use App\Models\Commune;
 use App\Models\PatientAbonne;
 use App\Models\PatientType;
 use Illuminate\Support\Facades\Validator;
@@ -16,17 +18,20 @@ class PatientAbonnePage extends Component
     use WithPagination;
     public $state=[],$isEditable,$patientToEdit,$patientToDelete,$fiche_number_to_edit,$ficheToEdit;
     public $type="Privé",$source="Golf",$keySearch="",$pageNumber=10;
-    public $abonnements,$typePatients;
+    public $abonnements,$typePatients,$communes;
     protected $listeners=['patientListener'=>'delete'];
 
     public function store(){
+        $date=(new DateFromatHelper())->formatDate($this->state['date_of_birth']);
+        //dd($date);
         $this->valideForm();
         $patientChecked=(new PatientHelper())->chekIfPatientExist($this->state['name'],$this->state['date_of_birth'],$this->type);
         if ($patientChecked) {
         }else{
+
             $fiche=(new FicheHelper())->create($this->state['fiche_number'],$this->type,$this->source);
             $patient=(new PatientHelper())
-                ->create($this->state['matricule'],$this->state['name'],$this->state['gender'],$this->state['date_of_birth'],
+                ->create($this->state['matricule'],$this->state['name'],$this->state['gender'],$date,
                     $this->state['phone'],$this->state['commune'],$this->state['avenue'],$this->state['quartier'],
                     $this->state['numero'],$this->state['type'],$fiche->id,0,$this->state['abonnement_id'],false,);
             $this->dispatchBrowserEvent('data-added',['message'=>'Pateint '.$patient->name.' bien ajouté !']);
@@ -42,8 +47,9 @@ class PatientAbonnePage extends Component
     }
 
     public function update(){
+        $date=(new DateFromatHelper())->formatDate($this->state['date_of_birth']);
         $patient=(new PatientHelper())
-                ->update($this->patientToEdit->id,$this->state['matricule'],$this->state['name'],$this->state['gender'],$this->state['date_of_birth'],
+                ->update($this->patientToEdit->id,$this->state['matricule'],$this->state['name'],$this->state['gender'],$date,
                     $this->state['phone'],$this->state['commune'],$this->state['avenue'],$this->state['quartier'],
                     $this->state['numero'],$this->state['type'],0,0,$this->state['abonnement_id'],false);
         $this->dispatchBrowserEvent('data-updated',['message'=>'Pateint '.$patient->name.' bien mis à jour !']);
@@ -72,7 +78,7 @@ class PatientAbonnePage extends Component
             [
                 'name'=>'required',
                 'gender'=>'required',
-                'date_of_birth'=>'required|date',
+                'date_of_birth'=>'required',
                 'phone'=>'required',
                 'commune'=>'required',
                 'avenue'=>'required',
@@ -98,13 +104,16 @@ class PatientAbonnePage extends Component
     public function mount(){
         $this->abonnements=Abonnement::all();
         $this->typePatients=PatientType::all();
+        $this->communes=Commune::all();
+        $this->state['matricule']=0;
     }
     public function render()
     {
         $patients=PatientAbonne::where('name','like','%'.$this->keySearch.'%')
+                ->orWhere('matricule','like','%'.$this->keySearch.'%')
                 ->with('fiche')
                 ->with('abonnement')
-                ->orderBy('created_at','ASC')
+                ->orderBy('patient_abonnes.created_at','DESC')
                 ->paginate($this->pageNumber);
         return view('livewire.patients.patient-abonne-page',['patients'=>$patients]);
     }

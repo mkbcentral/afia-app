@@ -10,10 +10,11 @@
 
                 </div>
             </div>
-            <div class="d-flex justify-content-between">
-                <H3 class="text-info">Total: {{$patients->count()}} patients</H3>
-                <button class="btn btn-primary" type="button" wire:click.prevent="resetPropreties"
-                    data-toggle="modal" data-target="#formPatientPersonnel">Nouveau</button>
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-primary btn-sm" type="button" wire:click.prevent="resetPropreties"
+                    data-toggle="modal" data-target="#formPatientPersonnel">
+                    <i class="fas fa-plus-circle"></i> Nouveau
+                </button>
 
             </div>
 
@@ -47,9 +48,7 @@
                             <th>NOM COMPLET</th>
                             <th class="text-center">GENRE</th>
                             <th class="text-center">AGE</th>
-                            <th class="text-center">SERVICE</th>
-                            <th class="text-center">TELEPHONE</th>
-                            <th>ADRESSE</th>
+                            <th class="text-right">SERVICE</th>
                             <th class="text-center">ACTIONS</th>
                         </tr>
                     </thead>
@@ -60,10 +59,8 @@
                                 <td>{{$patient->fiche->numero}}</td>
                                 <td>{{$patient->name}}</td>
                                 <td class="text-center">{{$patient->gender}}</td>
-                                <td class="text-center">0</td>
-                                <td class="text-center">{{$patient->service->name.'/'.$patient->type}}</td>
-                                <td class="text-center">{{$patient->phone}}</td>
-                                <td>{{$patient->commune.'/'.$patient->quartier.'/'.$patient->numero}}</td>
+                                <td class="text-center">{{$patient->getAge($patient->date_of_birth)}}</td>
+                                <td class="text-right">{{$patient->service->name.'/'.$patient->type}}</td>
                                 <td class="text-center">
                                     <button data-toggle="modal" data-target="#formPatientPersonnel"
                                         wire:click.prevent='edit({{$patient}})' class="btn btn-link btn-sm"

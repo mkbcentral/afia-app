@@ -9,5 +9,6 @@
             </div>
             </div>
         </div>
+        @livewire('stubs.test-date-time-page')
     </div>
 </x-app-layout>

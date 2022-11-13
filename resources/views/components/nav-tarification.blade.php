@@ -1,6 +1,6 @@
 <li class="nav-item" >
-    <a href="#" class="nav-link bg-secondary" >
-        &#x1F5C3;
+    <a href="#" class="nav-link bg-success" >
+        <i class="fas fa-file-alt"></i>
       <p>
         Tarification
         <i class="fas fa-angle-left right"></i>
@@ -8,25 +8,25 @@
     </a>
     <ul class="nav nav-treeview" >
         <x-nav-link  class="nav-link" href="{{ route('tarification.consultation') }}" :active="request()->routeIs('tarification.consultation')">
-            Consultation
+            <i class="fas fa-arrow-right"></i> Consultation
         </x-nav-link>
         <x-nav-link  class="nav-link" href="{{ route('tarification.labo') }}" :active="request()->routeIs('tarification.labo')">
-             Laboratoire
+            <i class="fas fa-arrow-right"></i> Laboratoire
         </x-nav-link>
         <x-nav-link  class="nav-link" href="{{ route('tarification.radio') }}" :active="request()->routeIs('tarification.radio')">
-             Radiologie
+            <i class="fas fa-arrow-right"></i>  Radiologie
         </x-nav-link>
         <x-nav-link  class="nav-link" href="{{ route('tarification.echo') }}" :active="request()->routeIs('tarification.echo')">
-             Echographie
+            <i class="fas fa-arrow-right"></i> Echographie
         </x-nav-link>
         <x-nav-link  class="nav-link" href="{{ route('tarification.acte') }}" :active="request()->routeIs('tarification.acte')">
-            Acte
+            <i class="fas fa-arrow-right"></i> Acte
         </x-nav-link>
         <x-nav-link  class="nav-link" href="{{ route('tarification.sejour') }}" :active="request()->routeIs('tarification.sejour')">
-            Sejour
+            <i class="fas fa-arrow-right"></i> Sejour
         </x-nav-link>
         <x-nav-link  class="nav-link" href="{{ route('tarification.autre') }}" :active="request()->routeIs('tarification.autre')">
-            Autres
+            <i class="fas fa-arrow-right"></i> Autres
         </x-nav-link>
 
     </ul>

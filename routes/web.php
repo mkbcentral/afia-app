@@ -35,6 +35,7 @@ Route::controller(TestController::class)->group(function(){
 });
 
 //Patients routes
+
 Route::get('patient-prive',PatientPrivePage::class)->name('patient.prive');
 Route::get('patient-abonne',PatientAbonnePage::class)->name('patient.abonne');
 Route::get('patient-personel',PatientPersonnelPage::class)->name('patient.personnel');
