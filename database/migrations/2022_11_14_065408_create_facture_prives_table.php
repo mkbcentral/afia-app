@@ -27,6 +27,7 @@ return new class extends Migration
             $table->boolean('is_livred')->default(false);
             $table->boolean('is_healed')->default(false);
             $table->boolean('is_dead')->default(false);
+            $table->string('month')->nullable();
             $table->timestamps();
         });
     }
