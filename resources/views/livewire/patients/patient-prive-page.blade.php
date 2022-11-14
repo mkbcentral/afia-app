@@ -60,6 +60,10 @@
                                 <td class="text-center">{{$patient->gender}}</td>
                                 <td class="text-center">{{$patient->getAge($patient->date_of_birth)}}</td>
                                 <td class="text-center">
+                                    <button data-toggle="modal" data-target="#formDemande"
+                                        wire:click.prevent='edit({{$patient}})' class="btn btn-link btn-sm"
+                                        type="button"><i class="fa fa-user-plus text-info" aria-hidden="true"></i>
+                                    </button>
                                     <button data-toggle="modal" data-target="#formPatientPrive"
                                         wire:click.prevent='edit({{$patient}})' class="btn btn-link btn-sm"
                                         type="button"><i class="fas fa-edit    "></i>
@@ -97,4 +101,5 @@
     </div>
     @include('livewire.patients.modals.form-patient-prive')
     @include('livewire.patients.modals.form-edit-fiche-number')
+    @include('livewire.patients.modals.demandes.form-demande-prive')
 </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Consultation;
 use App\Models\PatientPrive;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -18,6 +19,7 @@ return new class extends Migration
         Schema::create('facture_prives', function (Blueprint $table) {
             $table->id();
             $table->string('numero')->unique();
+            $table->foreignIdFor(Consultation::class)->constrained();
             $table->foreignIdFor(PatientPrive::class)->constrained();
             $table->foreignIdFor(User::class)->nullable()->constrained();
             $table->boolean('is_interneted')->default(false);
