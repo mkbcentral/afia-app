@@ -1,0 +1,43 @@
+<?php
+
+use App\Models\PatientPrive;
+use App\Models\User;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('facture_prives', function (Blueprint $table) {
+            $table->id();
+            $table->string('numero')->unique();
+            $table->foreignIdFor(PatientPrive::class)->constrained();
+            $table->foreignIdFor(User::class)->nullable()->constrained();
+            $table->boolean('is_interneted')->default(false);
+            $table->boolean('is_printed')->default(false);
+            $table->boolean('is_valited')->default(false);
+            $table->boolean('is_completed')->default(false);
+            $table->boolean('is_livred')->default(false);
+            $table->boolean('is_healed')->default(false);
+            $table->boolean('is_dead')->default(false);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('facture_prives');
+    }
+};

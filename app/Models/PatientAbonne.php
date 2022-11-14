@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class PatientAbonne extends Model
 {
@@ -18,6 +19,11 @@ class PatientAbonne extends Model
     public function abonnement(): BelongsTo
     {
         return $this->belongsTo(Abonnement::class, 'abonnement_id');
+    }
+
+    public function facture(): HasOne
+    {
+        return $this->hasOne(FactureAbonne::class);
     }
 
     public function getDateOfBirthAttribute($value){

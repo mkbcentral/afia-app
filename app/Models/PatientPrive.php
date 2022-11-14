@@ -7,6 +7,7 @@ use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class PatientPrive extends Model
 {
@@ -27,5 +28,11 @@ class PatientPrive extends Model
 
     public function getAge($date){
         return date('Y') - Carbon::createFromFormat('d/m/Y', $date)->format('Y');
+    }
+
+
+    public function facture(): HasOne
+    {
+        return $this->hasOne(FacturePrive::class);
     }
 }
