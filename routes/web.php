@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\TestController;
 use App\Http\Livewire\Admin\OtherConfigPage;
+use App\Http\Livewire\Facturation\FacturationAbonnePage;
+use App\Http\Livewire\Facturation\FacturationPrivePage;
 use App\Http\Livewire\Patients\PatientAbonnePage;
 use App\Http\Livewire\Patients\PatientPersonnelPage;
 use App\Http\Livewire\Patients\PatientPrivePage;
@@ -49,4 +51,8 @@ Route::get('tarification-consultation',ConsultationPage::class)->name('tarificat
 Route::get('tarification-actes',ActePage::class)->name('tarification.acte');
 Route::get('tarification-sejour',SejourPage::class)->name('tarification.sejour');
 Route::get('tarification-autres',AutrePage::class)->name('tarification.autre');
+
+//Facturation routes
+Route::get('facturation-prive',FacturationPrivePage::class)->name('facturation.prive');
+Route::get('facturation-prive',FacturationAbonnePage::class)->name('facturation.abonne');
 
