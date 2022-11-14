@@ -13,6 +13,7 @@
                 </x-nav-link>
                 <x-nav-patient/>
                 <x-nav-tarification/>
+                <x-nav-facturation/>
                 <x-nav-link class="nav-link" href="{{ route('configuration') }}" :active="request()->routeIs('configuration')">
                     <i class="fas fa-cogs"></i>
                     Configuration
