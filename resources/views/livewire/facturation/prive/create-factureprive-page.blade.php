@@ -23,7 +23,7 @@
                 <div class="card-body text-center">
                     <h4>Choisir ici</h4>
                     <button data-toggle="modal" data-target="#formLaboFacture" class="btn btn-primary">Laboratoire</button>
-                    <button class="btn btn-danger">Radoilogie</button>
+                    <button data-toggle="modal" data-target="#formRadioFacture" class="btn btn-danger">Radoilogie</button>
                     <button class="btn btn-secondary">Echographie</button>
                     <button class="btn btn-warning">Sejour</button>
                     <button class="btn btn-success">Actes</button>
@@ -35,4 +35,5 @@
     </div>
 
     @include('livewire.facturation.modals.form-labo-facture')
+    @include('livewire.facturation.modals.form-radio-facture')
 </div>
