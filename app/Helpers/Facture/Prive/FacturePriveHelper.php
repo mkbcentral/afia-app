@@ -1,6 +1,7 @@
 <?php
-    namespace App\Helpers\Facture;
+    namespace App\Helpers\Facture\Prive;
 
+use App\Helpers\Facture\FactureFormatNumberHelper;
 use App\Models\FacturePrive;
 
     class FacturePriveHelper{

@@ -1,8 +1,6 @@
 <?php
-
 namespace App\Http\Livewire\Facturation;
-
-use App\Helpers\Facture\FacturePriveHelper;
+use App\Helpers\Facture\Prive\FacturePriveHelper;
 use Livewire\Component;
 
 class FacturationPrivePage extends Component
