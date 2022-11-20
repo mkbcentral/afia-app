@@ -88,7 +88,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <x-label value="{{ __('Avenue de residence') }}" />
                             <x-input class="" type='text'
@@ -96,12 +96,23 @@
                             @error('avenue') <span class="error text-danger">{{ $message }}</span> @enderror
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <x-label value="{{ __('Numero de residence') }}" />
                             <x-input class="" type='text'
                                      placeholder="Numero" wire:model.defer='state.numero'/>
                             @error('numero') <span class="error text-danger">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+                    <div  class="col-md-4">
+                        <div class="form-group">
+                            <label for="my-select">Type de consulatation</label>
+                            <select id="my-select" class="form-control" wire:model.defer='consultation_id'>
+                                <option>Choisir...</option>
+                                @foreach ($consultations as $consultation)
+                                    <option value="{{$consultation->id}}">{{$consultation->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>

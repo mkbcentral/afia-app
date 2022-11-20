@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Others\DateFromatHelper;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,9 +28,8 @@ class PatientPrive extends Model
     }
 
     public function getAge($date){
-        return date('Y') - Carbon::createFromFormat('d/m/Y', $date)->format('Y');
+        return (new DateFromatHelper())->getUserAge($date);
     }
-
 
     public function facture(): HasOne
     {

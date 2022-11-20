@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Others\DateFromatHelper;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,16 +21,16 @@ class PatientPersonnel extends Model
     {
         return $this->belongsTo(PersonnelService::class, 'personnel_service_id');
     }
-
-    public function getDateOfBirthAttribute($value){
-        return Carbon::parse($value)->toFormattedDate();
-    }
-    public function getAge($date){
-        return date('Y') - Carbon::createFromFormat('d/m/Y', $date)->format('Y');
-    }
-
     public function facture(): HasOne
     {
         return $this->hasOne(FacturePersonnel::class);
+    }
+    //Format date attribute
+    public function getDateOfBirthAttribute($value){
+        return Carbon::parse($value)->toFormattedDate();
+    }
+    //Get patient age
+    public function getAge($date){
+        return (new DateFromatHelper())->getUserAge($date);
     }
 }

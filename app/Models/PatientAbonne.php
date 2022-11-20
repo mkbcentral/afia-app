@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Others\DateFromatHelper;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -31,6 +32,6 @@ class PatientAbonne extends Model
     }
 
     public function getAge($date){
-        return date('Y') - Carbon::createFromFormat('d/m/Y', $date)->format('Y');
+        return (new DateFromatHelper())->getUserAge($date);
     }
 }

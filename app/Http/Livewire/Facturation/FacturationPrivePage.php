@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire\Facturation;
 
+use App\Helpers\Facture\FacturePriveHelper;
 use Livewire\Component;
 
 class FacturationPrivePage extends Component
 {
     public function render()
     {
-        return view('livewire.facturation.facturation-prive-page');
+        $data=(new FacturePriveHelper())->getFactureByDay(date('Y-m-d'));
+        return view('livewire.facturation.facturation-prive-page',['factures'=>$data]);
     }
 }

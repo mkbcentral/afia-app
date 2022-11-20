@@ -10,7 +10,9 @@ class FacturePrive extends Model
 {
     use HasFactory;
 
-    public function facture(): BelongsTo
+    protected $guarded=[];
+
+    public function patient(): BelongsTo
     {
         return $this->belongsTo(PatientPrive::class, 'patient_prive_id');
     }

@@ -54,5 +54,5 @@ Route::get('tarification-autres',AutrePage::class)->name('tarification.autre');
 
 //Facturation routes
 Route::get('facturation-prive',FacturationPrivePage::class)->name('facturation.prive');
-Route::get('facturation-prive',FacturationAbonnePage::class)->name('facturation.abonne');
+Route::get('facturation-abonne',FacturationAbonnePage::class)->name('facturation.abonne');
 

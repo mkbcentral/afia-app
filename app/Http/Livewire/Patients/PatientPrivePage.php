@@ -2,10 +2,14 @@
 
 namespace App\Http\Livewire\Patients;
 
+use App\Helpers\Facture\FactureFormatNumberHelper;
+use App\Helpers\Facture\FacturePriveHelper;
 use App\Helpers\Fiches\FicheHelper;
 use App\Helpers\Others\DateFromatHelper;
 use App\Helpers\Patients\PatientHelper;
 use App\Models\Commune;
+use App\Models\Consultation;
+use App\Models\FacturePrive;
 use App\Models\PatientPrive;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
@@ -14,8 +18,8 @@ use Livewire\WithPagination;
 class PatientPrivePage extends Component
 {
     use WithPagination;
-    public $state=[],$isEditable,$patientToEdit,$patientToDelete,$fiche_number_to_edit,$ficheToEdit;
-    public $type="Privé",$source="Golf",$keySearch="",$pageNumber=10,$communes;
+    public $state=[],$isEditable,$patientToEdit,$patientToAdd,$patientToDelete,$fiche_number_to_edit,$ficheToEdit;
+    public $type="Privé",$source="Golf",$keySearch="",$pageNumber=10,$communes,$consultations,$consultation_id;
     protected $listeners=['patientListener'=>'delete'];
 
     public function store(){
@@ -23,13 +27,21 @@ class PatientPrivePage extends Component
         $this->valideForm();
         $patientChecked=(new PatientHelper())->chekIfPatientExist($this->state['name'],$this->state['date_of_birth'],$this->type);
         if ($patientChecked) {
+            $this->dispatchBrowserEvent('data-deleted',['message'=>'Ce patient est déjà enregistré !']);
         }else{
             $fiche=(new FicheHelper())->create($this->state['fiche_number'],$this->type,$this->source);
             $patient=(new PatientHelper())
                 ->create("",$this->state['name'],$this->state['gender'],$date,
                     $this->state['phone'],$this->state['commune'],$this->state['avenue'],$this->state['quartier'],
                     $this->state['numero'],'',$fiche->id,0,0,false);
-            $this->dispatchBrowserEvent('data-added',['message'=>'Pateint '.$patient->name.' bien ajouté !']);
+            $facture=(new FacturePriveHelper())
+                    ->create($this->consultation_id,$patient->id,null,date('m'));
+            if ($facture=="exist") {
+                $this->dispatchBrowserEvent('data-deleted',['message'=>'Ce patient a déjà une demande pour ce mois']);
+            } else {
+                $this->dispatchBrowserEvent('data-added',['message'=>'Pateint '.$patient->name.' bien ajouté !']);
+            }
+
         }
     }
 
@@ -37,6 +49,7 @@ class PatientPrivePage extends Component
         $this->state=$patient->toArray();
         $this->isEditable=true;
         $this->patientToEdit=$patient;
+        $this->patientToAdd=$patient;
         $this->fiche_number_to_edit=$patient->fiche->numero;
         $this->ficheToEdit=$patient->fiche;
     }
@@ -47,6 +60,7 @@ class PatientPrivePage extends Component
                 ->update($this->patientToEdit->id,"",$this->state['name'],$this->state['gender'],$date,
                     $this->state['phone'],$this->state['commune'],$this->state['avenue'],$this->state['quartier'],
                     $this->state['numero'],'',0,0,0,false);
+
         $this->dispatchBrowserEvent('data-updated',['message'=>'Pateint '.$patient->name.' bien mis à jour !']);
     }
 
@@ -94,8 +108,19 @@ class PatientPrivePage extends Component
         $this->isEditable=false;
     }
 
+    public function createNewFacture(){
+        $facture=(new FacturePriveHelper())
+            ->create($this->consultation_id,$this->patientToAdd->id,null,date('m'));
+        if ($facture=="exist") {
+            $this->dispatchBrowserEvent('data-deleted',['message'=>'Ce patient a déjà une demande pour ce mois']);
+        } else {
+            $this->dispatchBrowserEvent('data-added',['message'=>'Demande bien réalisée!']);
+        }
+    }
+
     public function mount(){
         $this->communes=Commune::all();
+        $this->consultations=Consultation::all();
     }
     public function render()
     {
