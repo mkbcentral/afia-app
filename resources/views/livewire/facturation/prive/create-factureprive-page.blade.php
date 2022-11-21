@@ -26,7 +26,7 @@
                     <button data-toggle="modal" data-target="#formRadioFacture" class="btn btn-danger">Radoilogie</button>
                     <button data-toggle="modal" data-target="#formEchoFacture" class="btn btn-secondary">Echographie</button>
                     <button class="btn btn-warning">Sejour</button>
-                    <button class="btn btn-success">Actes</button>
+                    <button data-toggle="modal" data-target="#formActeFacture" class="btn btn-success">Actes</button>
                     <button class="btn btn-info">Autres</button>
                     <button class="btn btn-dark">Medication</button>
                 </div>
@@ -37,4 +37,5 @@
     @include('livewire.facturation.modals.form-labo-facture')
     @include('livewire.facturation.modals.form-radio-facture')
     @include('livewire.facturation.modals.form-echo-facture')
+    @include('livewire.facturation.modals.form-acte-facture')
 </div>

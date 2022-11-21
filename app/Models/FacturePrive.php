@@ -45,6 +45,12 @@ class FacturePrive extends Model
             'echographie_facture_prive')->withPivot(['id','qty']);
     }
 
+    public function actes(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Acte::class,
+            'acte_facture_prive')->withPivot(['id','qty']);
+    }
 
     public function getTotal($id){
         return (new FacturePriveAmountHelper())->getFactureAmout($id);
