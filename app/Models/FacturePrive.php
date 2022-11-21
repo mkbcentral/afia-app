@@ -38,6 +38,13 @@ class FacturePrive extends Model
             'examen_radio_facture_prive')->withPivot(['id','qty']);
     }
 
+    public function examenEchoes(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Echographie::class,
+            'echographie_facture_prive')->withPivot(['id','qty']);
+    }
+
 
     public function getTotal($id){
         return (new FacturePriveAmountHelper())->getFactureAmout($id);

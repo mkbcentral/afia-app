@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Tarification;
 
-use App\Models\ExamenEcho;
+use App\Models\Echographie;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 
@@ -28,7 +28,7 @@ class EchoPage extends Component
             ]
 
         )->validate();
-        $echo=new ExamenEcho();
+        $echo=new Echographie();
         $echo->name=$this->state['name'];
         $echo->abreviation=$this->state['abreviation'];
         $echo->price_prive=$this->state['price_prive'];
@@ -40,7 +40,7 @@ class EchoPage extends Component
         $this->state['abreviation']="Aucune";
     }
 
-    public function edit(ExamenEcho $echo){
+    public function edit(Echographie $echo){
         $this->state=$echo->toArray();
         $this->isEditable=true;
         $this->echoToEdit=$echo;
@@ -55,7 +55,7 @@ class EchoPage extends Component
         $this->dispatchBrowserEvent('data-added',['message'=>'Infos bien mise à jour !']);
     }
 
-    public function showDeleteDialog(ExamenEcho $echo){
+    public function showDeleteDialog(Echographie $echo){
         $this->dispatchBrowserEvent('delete-tarification-dialog');
         $this->echoToDelete=$echo;
     }
@@ -79,12 +79,12 @@ class EchoPage extends Component
     public function render()
     {
         if ($this->isTrashed==false) {
-            $echos=ExamenEcho::where('changed',false)
+            $echos=Echographie::where('changed',false)
             ->where('name','like','%'.$this->keySearch.'%')
             ->orderBy('name','ASC')
             ->get();
         } else {
-            $echos=ExamenEcho::where('changed',true)
+            $echos=Echographie::where('changed',true)
             ->where('name','like','%'.$this->keySearch.'%')
             ->orderBy('name','ASC')
             ->get();

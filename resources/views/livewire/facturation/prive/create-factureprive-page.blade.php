@@ -24,7 +24,7 @@
                     <h4>Choisir ici</h4>
                     <button data-toggle="modal" data-target="#formLaboFacture" class="btn btn-primary">Laboratoire</button>
                     <button data-toggle="modal" data-target="#formRadioFacture" class="btn btn-danger">Radoilogie</button>
-                    <button class="btn btn-secondary">Echographie</button>
+                    <button data-toggle="modal" data-target="#formEchoFacture" class="btn btn-secondary">Echographie</button>
                     <button class="btn btn-warning">Sejour</button>
                     <button class="btn btn-success">Actes</button>
                     <button class="btn btn-info">Autres</button>
@@ -36,4 +36,5 @@
 
     @include('livewire.facturation.modals.form-labo-facture')
     @include('livewire.facturation.modals.form-radio-facture')
+    @include('livewire.facturation.modals.form-echo-facture')
 </div>

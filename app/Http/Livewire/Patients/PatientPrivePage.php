@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Patients;
 
 use App\Helpers\Facture\FactureFormatNumberHelper;
 use App\Helpers\Facture\FacturePriveHelper;
+use App\Helpers\Facture\Prive\FacturePriveHelper as PriveFacturePriveHelper;
 use App\Helpers\Fiches\FicheHelper;
 use App\Helpers\Others\DateFromatHelper;
 use App\Helpers\Patients\PatientHelper;
@@ -34,7 +35,7 @@ class PatientPrivePage extends Component
                 ->create("",$this->state['name'],$this->state['gender'],$date,
                     $this->state['phone'],$this->state['commune'],$this->state['avenue'],$this->state['quartier'],
                     $this->state['numero'],'',$fiche->id,0,0,false);
-            $facture=(new FacturePriveHelper())
+            $facture=(new PriveFacturePriveHelper())
                     ->create($this->consultation_id,$patient->id,null,date('m'));
             if ($facture=="exist") {
                 $this->dispatchBrowserEvent('data-deleted',['message'=>'Ce patient a déjà une demande pour ce mois']);
@@ -109,7 +110,7 @@ class PatientPrivePage extends Component
     }
 
     public function createNewFacture(){
-        $facture=(new FacturePriveHelper())
+        $facture=(new PriveFacturePriveHelper())
             ->create($this->consultation_id,$this->patientToAdd->id,null,date('m'));
         if ($facture=="exist") {
             $this->dispatchBrowserEvent('data-deleted',['message'=>'Ce patient a déjà une demande pour ce mois']);
