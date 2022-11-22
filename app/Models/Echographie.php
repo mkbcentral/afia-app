@@ -17,4 +17,11 @@ class Echographie extends Model
             'echographie_facture_prive'
         )->withPivot(['id','qty']);
     }
+
+    public function getPricePRiveAttribute($value){
+        return $value*2000;
+    }
+    public function getPriceAbonneAttribute($value){
+        return $value*2000;
+    }
 }

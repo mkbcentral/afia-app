@@ -27,15 +27,15 @@
                     <button data-toggle="modal" data-target="#formEchoFacture" class="btn btn-secondary">Echographie</button>
                     <button class="btn btn-warning">Sejour</button>
                     <button data-toggle="modal" data-target="#formActeFacture" class="btn btn-success">Actes</button>
-                    <button class="btn btn-info">Autres</button>
+                    <button data-toggle="modal" data-target="#formAutreFacture" class="btn btn-info">Autres</button>
                     <button class="btn btn-dark">Medication</button>
                 </div>
            </div>
         </div>
     </div>
-
     @include('livewire.facturation.modals.form-labo-facture')
     @include('livewire.facturation.modals.form-radio-facture')
     @include('livewire.facturation.modals.form-echo-facture')
     @include('livewire.facturation.modals.form-acte-facture')
+    @include('livewire.facturation.modals.form-autre-facture')
 </div>

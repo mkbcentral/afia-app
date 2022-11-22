@@ -21,6 +21,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>DATE</th>
+                                                <th>N° FACTURE</th>
                                                 <th>NOM DU PATIENT</th>
                                                 <th class="text-right">MONTANT CDF</th>
                                                 <th class="text-center">Actions</th>
@@ -31,10 +32,12 @@
                                                 <tr>
                                                     <td>{{$index+1}}</td>
                                                     <td>{{$facture->created_at->format('d/m/Y')}}</td>
+                                                    <td>{{$facture->numero}}</td>
                                                     <td>{{$facture->patient->name}}</td>
-                                                    <td class="text-right">{{$facture->getTotal($facture->id)}}</td>
+                                                    <td class="text-right">{{number_format($facture->getTotal($facture->id), 2, ',', ' ')}}</td>
                                                     <td class="text-center">
                                                         <a href="{{ route('facturation.prive.create',$facture->id) }}">Facturer</a>
+                                                        <button wire:click.prevent='show({{$facture}})' data-toggle="modal" data-target="#showFacturePrive" class="btn btn-link btn-sm">Voir</button>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -55,4 +58,5 @@
                 </div>
         </div>
     </div>
+    @include('livewire.facturation.prive.show-facture-prive')
 </div>

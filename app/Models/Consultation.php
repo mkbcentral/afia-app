@@ -14,4 +14,11 @@ class Consultation extends Model
     {
         return $this->hasOne(FacturePrive::class);
     }
+
+    public function getPricePRiveAttribute($value){
+        return $value*2000;
+    }
+    public function getPriceAbonneAttribute($value){
+        return $value*2000;
+    }
 }

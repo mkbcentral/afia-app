@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Facturation\Prive;
 
 use App\Models\Acte;
+use App\Models\Autre;
 use App\Models\Echographie;
 use App\Models\ExamenLabo;
 use App\Models\ExamenRadio;
@@ -13,10 +14,10 @@ use PhpParser\Builder\Function_;
 class CreateFactureprivePage extends Component
 {
     public $factureData,$facture;
-    public $labos=[],$radios,$echos,$actes;
+    public $labos=[],$radios,$echos,$actes,$autres;
 
 
-    public $itemsLabo=[],$itemsRadio=[],$itemsEcho=[],$itemsActe=[];
+    public $itemsLabo=[],$itemsRadio=[],$itemsEcho=[],$itemsActe=[],$itemsAutre;
 
     public function mount(){
         $this->factureData=FacturePrive::find($this->facture);
@@ -24,6 +25,7 @@ class CreateFactureprivePage extends Component
         $this->radios=ExamenRadio::where('changed',false)->get();
         $this->echos=Echographie::where('changed',false)->get();
         $this->actes=Acte::where('changed',false)->get();
+        $this->autres=Autre::where('changed',false)->get();
     }
     //Save detail examens labo
     public function saveLabos(){
@@ -64,6 +66,17 @@ class CreateFactureprivePage extends Component
             dd("Vide");
         } else {
             if ($this->factureData->actes()->sync($this->itemsActe,false)) {
+                dd("Added");
+            }
+        }
+       //$this->dispatchBrowserEvent('data-added',['message'=>'Infos bien ajoutée !']);
+    }
+    //Save detail examens echo
+    public function saveAutres(){
+        if ($this->itemsAutre==[]) {
+            dd("Vide");
+        } else {
+            if ($this->factureData->autres()->sync($this->itemsAutre,false)) {
                 dd("Added");
             }
         }

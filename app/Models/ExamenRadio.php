@@ -15,4 +15,14 @@ class ExamenRadio extends Model
         return $this->belongsToMany(FacturePrive::class,
             'examen_radio_facture_prive')->withPivot(['id','qty']);
     }
+
+    public function getPricePriveAttribute($value){
+        return $value*2000;
+    }
+
+    public function getPriceAbonneAttribute($value){
+        return $value*2000;
+    }
+
+
 }
